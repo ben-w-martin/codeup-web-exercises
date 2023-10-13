@@ -1,10 +1,10 @@
 console.log("Hello from external JavaScript");
 
-alert('Welcome to my Website!');
+alert("Welcome to my Website!");
 
-let userString1 = prompt("What is your favorite color?");
+let favColor = prompt("What is your favorite color?");
 
-alert(`"Great, ${userString1} is my favorite color too!`);
+alert(`Great, ${favColor} is my favorite color too!`);
 
 // Complete exercise 3 from the previous lesson, but write your code in
 // the external.js file instead of in the console.
@@ -12,14 +12,18 @@ alert(`"Great, ${userString1} is my favorite color too!`);
 //     to ask the user for that number.
 //     Use an alert to show the results of each problem.
 
-let littleMermaidInput = prompt("It seems you owe some rental fees. Answer the following before proceeding: How many days did you have The Little Mermaid?");
-let brotherBearInput = prompt("How many days did you have Brother Bear?");
-let herculesInput = prompt("How many days did you have Hercules?");
+let littleMermaidInput = prompt("It seems you owe some rental fees ($3 per day, per movie). Answer the following before proceeding: *In numeric values only* How many days did you have The Little Mermaid?");
+    alert(`You owe \$${Number(littleMermaidInput) * 3} on The Little Mermaid`);
+let brotherBearInput = prompt("*In numeric values only* How many days did you have Brother Bear?");
+    alert(`You owe \$${Number(brotherBearInput) * 3} on Brother Bear`);
+let herculesInput = prompt("*In numeric values only* How many days did you have Hercules?");
+    alert(`You owe \$${Number(herculesInput) * 3} on Hercules`);
+console.log(littleMermaidInput, brotherBearInput, herculesInput);
 
 littleMermaidInput = Number(littleMermaidInput); // 3
 brotherBearInput = Number(brotherBearInput); // 5
 herculesInput = Number(herculesInput); // 1
-
+console.log(littleMermaidInput, brotherBearInput, herculesInput);
 let totalPrice = (littleMermaidInput + brotherBearInput + herculesInput) * 3;
 
 alert(`At a rate of \$3 per day, your total price is \$${totalPrice}`);
