@@ -14,20 +14,14 @@ alert(`Great, ${favColor} is my favorite color too!`);
 //     to ask the user for that number.
 //     Use an alert to show the results of each problem.
 
-let littleMermaidInput = prompt("It seems you owe some rental fees ($3 per day, per movie). Answer the following before proceeding: *In numeric values only* How many days did you have The Little Mermaid?");
-    alert(`You owe \$${Number(littleMermaidInput) * 3} on The Little Mermaid`);
-let brotherBearInput = prompt("*In numeric values only* How many days did you have Brother Bear?");
-    alert(`You owe \$${Number(brotherBearInput) * 3} on Brother Bear`);
-let herculesInput = prompt("*In numeric values only* How many days did you have Hercules?");
-    alert(`You owe \$${Number(herculesInput) * 3} on Hercules`);
-console.log(littleMermaidInput, brotherBearInput, herculesInput);
-
-littleMermaidInput = Number(littleMermaidInput); // 3
-brotherBearInput = Number(brotherBearInput); // 5
-herculesInput = Number(herculesInput); // 1
+let littleMermaidInput = Number(prompt("It seems you owe some rental fees ($3 per day, per movie). Answer the following before proceeding: *In numeric values only* How many days did you have The Little Mermaid?"));
+    alert(`You owe \$${littleMermaidInput * 3} on The Little Mermaid`);
+let brotherBearInput = Number(prompt("*In numeric values only* How many days did you have Brother Bear?"));
+    alert(`You owe \$${brotherBearInput * 3} on Brother Bear`);
+let herculesInput = Number(prompt("*In numeric values only* How many days did you have Hercules?"));
+    alert(`You owe \$${herculesInput * 3} on Hercules`);
 console.log(littleMermaidInput, brotherBearInput, herculesInput);
 let totalPrice = (littleMermaidInput + brotherBearInput + herculesInput) * 3;
-
 
 alert(`At a rate of \$3 per day, your total price is \$${totalPrice}`);
 
