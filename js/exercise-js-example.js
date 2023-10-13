@@ -12,7 +12,7 @@ console.log(favoriteColor);
 
 // Alert - pop-up message to user from JS
 alert("Hey! It's JS here.");
-
+// Heyyyy
 //we can concat inside alert
 alert(`howdy, from ${studentName}, ${instructorName}, and ${myDogName}!!!`);
 
