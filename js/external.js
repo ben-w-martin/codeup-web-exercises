@@ -1,3 +1,5 @@
+"use strict"
+
 console.log("Hello from external JavaScript");
 
 alert("Welcome to my Website!");
@@ -25,6 +27,7 @@ brotherBearInput = Number(brotherBearInput); // 5
 herculesInput = Number(herculesInput); // 1
 console.log(littleMermaidInput, brotherBearInput, herculesInput);
 let totalPrice = (littleMermaidInput + brotherBearInput + herculesInput) * 3;
+
 
 alert(`At a rate of \$3 per day, your total price is \$${totalPrice}`);
 
