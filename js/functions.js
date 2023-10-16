@@ -117,3 +117,4 @@ x /= 100;
 y = parseFloat(prompt("What is the total price of your item?"));
 let discount = applyDiscount(x, y);
 alert(`Your discounted price is \$${discount}.`);
+
