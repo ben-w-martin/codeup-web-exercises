@@ -91,7 +91,7 @@ let x = parseFloat(prompt("What percentage tip would you like to give?"));
 x /= 100;
 let y = parseFloat(prompt("What is the total of your bill?"));
 let tip = calculateTip(x, y);
-alert(`Your tip is \$${tip}`.);
+alert(`Your tip is \$${tip}.`);
 
 /**
  * TODO:
@@ -110,12 +110,12 @@ alert(`Your tip is \$${tip}`.);
 
 const applyDiscount = (x, y) => {
     let discount = x * y;
-    discount = discount.toFixed(2);
-    return discount;
+    discount = y - discount;
+    return discount.toFixed(2);
 }
 
 x = parseFloat(prompt("What percentage is your discount?"));
 x /= 100;
 y = parseFloat(prompt("What is the total price of your item?"));
 let discount = applyDiscount(x, y);
-alert(`Your discount is \$${discount}.`);
+alert(`Your discounted price is \$${discount}.`);
