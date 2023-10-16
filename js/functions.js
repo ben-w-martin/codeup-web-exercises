@@ -57,8 +57,7 @@ const random = Math.floor((Math.random() * 3) + 1);
  * number)
  */
 
-const isTwo = (x) => x == 2;
-console.log(random);
+const isTwo = (x) => x === 2;
 console.log("It is " + isTwo(random) + " that " + random + " is equal to 2: ");
 
 /**
@@ -78,7 +77,6 @@ const calculateTip = (x, y) => {
     tip = tip.toFixed(2);
     return tip;
 }
-
 
 /**
  * TODO:
@@ -110,8 +108,8 @@ alert(`Your tip is \$${tip}.`);
 
 const applyDiscount = (x, y) => {
     let discount = x * y;
-    discount = y - discount;
-    return discount.toFixed(2);
+    let afterDiscount = y - discount;
+    return afterDiscount.toFixed(2);
 }
 
 x = parseFloat(prompt("What percentage is your discount?"));
