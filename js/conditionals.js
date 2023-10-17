@@ -78,6 +78,8 @@ const analyzeColor = (color) => {
     }
 }
 
+console.log(analyzeColor(randomColor));
+
 /**
  * TODO:
  * Prompt the user for a color when the page loads, and pass the input from the
@@ -85,7 +87,7 @@ const analyzeColor = (color) => {
  * function to show it to the user.
  */
 
-let userFav = prompt("What is your favorite color?");
+let userFav = prompt("What is your favorite color?").toLowerCase();
 alert(analyzeColor(userFav));
 
 /* ########################################################################## */
@@ -233,7 +235,7 @@ let num = prompt("Enter a number.");
 
 const numberInfoGenerator = (num) => {
     if (num != parseFloat(num)) {
-        console.log("numInfoGenerator - Invalid");
+        console.log("numInfoGenerator - NaN");
         return alert("Invalid input, scum!");
     } else {
         return alert(`The number ${num} is ${evenOrOdd(num)}. With 100 added it is ${parseFloat(num) + 100}. Also ${num}
