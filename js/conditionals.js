@@ -217,9 +217,9 @@ const evenOrOdd = (num) => {
     }
 }
 
-const numPlusHundred = (num) => {
-    return num + 100;
-}
+// const numPlusHundred = (num) => {
+//     return num + 100;
+// }
 
 const posOrNeg = (num) => {
     if (num >= 0) {
@@ -232,11 +232,12 @@ const posOrNeg = (num) => {
 let num = prompt("Enter a number.");
 
 const numberInfoGenerator = (num) => {
-    if (num !== parseFloat(num)) {
+    if (num != parseFloat(num)) {
+        console.log("numInfoGenerator - Invalid");
         return alert("Invalid input, scum!");
     } else {
-        return `The number ${num} is ${evenOrOdd(num)}. With 100 added it is ${num + 100}. Also ${num}
-         is a ${posOrNeg(num)} number. Amazing, huh?`
+        return alert(`The number ${num} is ${evenOrOdd(num)}. With 100 added it is ${parseFloat(num) + 100}. Also ${num}
+         is a ${posOrNeg(num)} number. Amazing, huh?`);
     }
 }
 
