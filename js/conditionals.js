@@ -78,7 +78,7 @@ const analyzeColor = (color) => {
     }
 }
 
-console.log(analyzeColor(randomColor));
+alert(randomColor + ": " + analyzeColor(randomColor));
 
 /**
  * TODO:
@@ -114,27 +114,28 @@ alert(analyzeColor(userFav));
 
 const calculateTotal = (luckyNum, price) => {
     let discounted = 0;
-    switch(luckyNum) {
+    switch (luckyNum) {
         case 0:
             return price;
             break;
         case 1:
-            discounted = price * 0.1; return price - discounted;
+            discounted = price * 0.1;
+            return price - discounted;
             break;
         case 2:
-             discounted = price * 0.25;
+            discounted = price * 0.25;
             return price - discounted;
             break;
         case 3:
-             discounted = price * 0.35;
+            discounted = price * 0.35;
             return price - discounted;
             break;
         case 4:
-             discounted = price * 0.5;
+            discounted = price * 0.5;
             return price - discounted;
             break;
         case 5:
-             discounted = price * 1;
+            discounted = price * 1;
             return price - discounted;
             break;
         default:
@@ -212,7 +213,7 @@ alert(`Since your lucky number is ${userNumber}, your total: \$${totalBill} is c
  */
 
 const evenOrOdd = (num) => {
-    if (num % 2 == 0){
+    if (num % 2 == 0) {
         return "even"
     } else {
         return "odd"
