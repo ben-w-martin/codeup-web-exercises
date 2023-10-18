@@ -25,6 +25,7 @@ const evenOrOdd = (num) => {
     }
 }
 
+// Exercise 3
 const randomEvenOrOdd = () => {
     // let nextRandomNumber = 0;
     for (let i = 0; i < 10; i++) {
@@ -34,6 +35,17 @@ const randomEvenOrOdd = () => {
 }
 
 console.log(randomEvenOrOdd());
+
+// Exercise 4
+let concat = (x) => x.toString() + x.toString();
+const numberPyramid = () => {
+    let pyramid;
+    for (let i = 1; i < 10; i++) {
+    }
+}
+console.log(numberPyramid());
+
+
 
 
 
