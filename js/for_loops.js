@@ -24,14 +24,13 @@ const randomEvenOrOdd = () => {
     // let nextRandomNumber = 0;
     for (let i = 0; i < 10; i++) {
         console.log(`${randomNumber} is ${evenOrOdd(randomNumber)}`);
-        randomNumber = Math.floor(Math.random() * 200 - 20) + 20;
+        randomNumber = Math.floor(Math.random() * (200 - 20 + 1) ) + 20;
     }
 }
 
 randomEvenOrOdd();
 
 // Exercise 4
-let concat = (x) => x.toString() + x.toString();
 const numberPyramid = () => {
     let counter = 1;
     for (let i = 1; i < 10; i++) {
@@ -49,4 +48,26 @@ const countByFives = () => {
     }
 }
 countByFives();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
