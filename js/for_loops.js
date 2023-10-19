@@ -34,18 +34,18 @@ const randomEvenOrOdd = () => {
     }
 }
 
-console.log(randomEvenOrOdd());
+randomEvenOrOdd();
 
 // Exercise 4
 let concat = (x) => x.toString() + x.toString();
 const numberPyramid = () => {
-    let pyramid;
+    let counter = 1;
     for (let i = 1; i < 10; i++) {
+        console.log(i * counter);
+        counter += "1";
     }
 }
-console.log(numberPyramid());
-
-
+numberPyramid();
 
 
 
