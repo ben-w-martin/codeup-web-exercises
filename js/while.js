@@ -10,20 +10,18 @@ while (i <= 16) {
 }
 
 let totalCones = Math.floor(Math.random() * (100 - 50 + 1) ) + 50;
-console.log(totalCones);
 let conesPerCustomer;
 do {
     conesPerCustomer = Math.floor(Math.random() * (5 - 1 + 1) ) + 1;
-    if (conesPerCustomer > totalCones) {
+    if (totalCones > conesPerCustomer) { //
+        console.log(`You asked for ${conesPerCustomer} cones. There are ${totalCones - conesPerCustomer} left.`);
+    }
+    if (conesPerCustomer > totalCones) { // breaks loop
         console.log(`Sorry, you can't have ${conesPerCustomer} because there are only ${totalCones} left for the day.`);
         break;
     }
-    if (totalCones < 5 && conesPerCustomer > totalCones) {
-        console.log(`Sorry, you can't have ${conesPerCustomer} because there are only ${totalCones} left for the day.`)
-        break;
-    }
     if (totalCones === conesPerCustomer) {
-        console.log("Congrats! All cones are sold!");
+        console.log(`You need ${conesPerCustomer} and we have ${totalCones} left. Congrats! All cones are sold!`);
         break;
     }
     totalCones -= conesPerCustomer;
