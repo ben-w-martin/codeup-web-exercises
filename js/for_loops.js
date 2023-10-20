@@ -9,6 +9,10 @@
 *  (() => {
 *----------variables, functions are run, but cannot be called elsewhere.
 *  })();
+*
+*  Math.random()
+*  To generate random number: Math.floor(Math.random() * (max - min + 1) + min);
+*  "+ 1" makes max and min inclusive.
 */
 
 
@@ -24,7 +28,7 @@
 })();
 
 (() => {
-    let randomNumber = Math.floor(Math.random() * 200 - 20) + 20;
+    let randomNumber = Math.floor(Math.random() * (200 - 20 + 1)) + 20;
 
     const evenOrOdd = (num) => {
         if (num % 2 == 0) {
@@ -49,10 +53,8 @@
 (() => {
 // Exercise 4
 const numberPyramid = () => {
-    let counter = 1;
     for (let i = 1; i < 10; i++) {
-        console.log(i * counter);
-        counter += "1";
+        console.log(i.toString().repeat(i));
     }
 }
 numberPyramid();
@@ -60,10 +62,8 @@ numberPyramid();
 
 (() => {
 const countByFives = () => {
-    let difference = 105;
-    for (let i = 0; i < 20 ; i++) {
-        difference -= 5;
-        console.log(difference);
+    for (let i = 100; i > 0; i -= 5) {
+        console.log(i);
     }
 }
 countByFives();
