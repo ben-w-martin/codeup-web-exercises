@@ -24,7 +24,3 @@ do {
     }
 } while (totalCones > 0);
 
-
-
-
-
