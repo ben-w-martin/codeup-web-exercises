@@ -29,11 +29,12 @@
      * string, and <li> tags around each planet.
      */
 
-    let planetsUl = planetsArray;
-    planetsUl = planetsUl.join("</li>,<li>");
-    planetsUl = planetsUl.split(",");
-    planetsUl.push("</li></ul>");
-    planetsUl.unshift("<ul><li>");
-    planetsUl = planetsUl.join("");
+    // let planetsUl = planetsArray;
+    // planetsUl = planetsUl.join("</li>,<li>");
+    // planetsUl = planetsUl.split(",");
+    // planetsUl.push("</li></ul>");
+    // planetsUl.unshift("<ul><li>");
+    // planetsUl = planetsUl.join("");
+    let planetsUl = `<ul><li>${planetsArray.join("</li><li>")}</li></ul>`;
     console.log(planetsUl);
 })();
