@@ -36,6 +36,4 @@
     planetsUl.unshift("<ul><li>");
     planetsUl = planetsUl.join("");
     console.log(planetsUl);
-
-
 })();

@@ -131,6 +131,7 @@
      *      ...
      */
 
+    // logs each book in "books" to console
     const showBooks = () => {
         let i = 0;
         books.forEach(book => {
@@ -152,6 +153,7 @@
      *   `showBookInfo` function.
      */
 
+    // Pushes new book object to "books"
     function createBook(newTitle, newFirst, newLast) {
         books.push({
             title: newTitle,
