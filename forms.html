@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Forms</title>
 </head>
 <body>
+<header>
+    <h1>Register With Us</h1>
+</header>
+<main>
+    <form action="https://request-inspector.glitch.me/" method="POST">
+        <label for="email">Email:
+            <input type="text" id="email" name="email" placeholder="email">
+        </label><br>
+        <label for="password">Password:
+            <input type="text" id="password" name="password" placeholder="password">
+        </label><br>
+        <label for="bio">Your Bio:
+            <textarea id="bio" name="bio" placeholder="tell us who you are."></textarea>
+        </label><br>
+        <label for="reference">How did you hear about us?<br>
+            <input type="radio" name="reference" value="billboard">Billboard</input><br>
+            <input type="radio" name="reference" value="radio-ad">Radio Advertisement</input><br>
+            <input type="radio" name="reference" value="internet-ad">Internet Advertisement</input><br>
+            <input type="radio" name="reference" value="other">Other</input><br>
+        </label><br>
 
+    </form>
+</main>
 </body>
 </html>
