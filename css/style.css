@@ -1,3 +1,53 @@
 .fancy-header{
     color:purple;
 }
+
+body {
+    background-color: azure;
+    background-image: url("../img/noise-article.png");
+    font-family: monospace;
+}
+
+ul li {
+    list-style-image: url("../img/bullet.png");
+}
+
+header h1 {
+    text-align: center;
+}
+
+h2,
+h3 {
+    color: #009100;
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "BD Geminis";
+}
+
+#product-info {
+    background-color: blanchedalmond;
+}
+
+#product-info th{
+    background-color: burlywood;
+}
+#product-info td {
+    background-color: antiquewhite;
+}
+
+a:link{
+    color: #009100;
+}
+a:hover{
+    font-weight: bold;
+}
+a:active{
+    font-weight: revert;
+}
+a:visited{
+    color: lime;
+}
