@@ -6,6 +6,7 @@ body {
     background-color: azure;
     background-image: url("../img/noise-article.png");
     font-family: monospace;
+    border: none;
 }
 
 ul li {
@@ -25,7 +26,7 @@ h3 {
 h1,
 h2,
 h3 {
-    font-family: "BD Geminis";
+    font-family: "BD Geminis", Serif;
 }
 
 hr {
