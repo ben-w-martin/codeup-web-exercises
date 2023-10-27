@@ -28,15 +28,42 @@ h3 {
     font-family: "BD Geminis";
 }
 
+hr {
+    height: 5px;
+    background-color: gray;
+}
+
+#vision-img img{
+    border-radius: 10%;
+}
+
 #product-info {
     background-color: blanchedalmond;
+    border: 2px solid black;
+    width: 400px;
+}
+
+#product-info * {
+    padding: 10px;
 }
 
 #product-info th{
     background-color: burlywood;
 }
+#product-info th:hover{
+    background-color: #dcb179;
+}
 #product-info td {
     background-color: antiquewhite;
+}
+#product-info td:hover {
+    background-color: blanchedalmond;
+    text-decoration: underline;
+}
+
+#product-info th,
+#product-info td{
+    border: 2px solid black;
 }
 
 a:link{
