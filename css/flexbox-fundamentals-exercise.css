@@ -35,6 +35,10 @@ h2, h3 {
     margin: 0 auto;
 }
 
+.card h2 {
+    margin-top: .6em;
+}
+
 section {
     display: flex;
 }
