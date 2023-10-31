@@ -12,6 +12,7 @@ body {
     width: calc(100% - 40px);
     max-width: 530px;
     box-shadow: 0 0 104px -40px rgba(0, 0, 0, 0.25);
+    z-index: 1;
 }
 
 .container.login h1 {
@@ -37,6 +38,7 @@ body {
 
 .graphic {
     position: absolute;
+    /*z-index: -1;*/
 }
 
 .footer-wave {
