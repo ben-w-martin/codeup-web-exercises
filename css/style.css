@@ -4,13 +4,13 @@
 
 body {
     background-color: azure;
-    background-image: url("../img/noise-article.png");
+    background-image: url("../images/noise-article.png");
     font-family: monospace;
     border: none;
 }
 
 ul li {
-    list-style-image: url("../img/bullet.png");
+    list-style-image: url("../images/bullet.png");
 }
 
 header h1 {
