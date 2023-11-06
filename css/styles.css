@@ -34,6 +34,11 @@ body {
     border: none;
     border-radius: 50%;
     box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.25);
+    display: flex;
+}
+
+#cancel>img{
+    margin: auto;
 }
 
 .graphic {
@@ -47,6 +52,10 @@ body {
     width: 100%;
 
 }
+
+/*#footer-wave-bottom {*/
+/*    max-height: 150px;*/
+/*}*/
 
 #dots-1 {
     left: 5%;
