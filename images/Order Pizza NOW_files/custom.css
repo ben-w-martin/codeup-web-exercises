@@ -5,8 +5,8 @@ body {
 }
 .jumbotron {
     background-image: url("./../images/pizza.png");
-    height: 346px;
-    background-size: cover;
+    width: 70dvw;
+    height: 20dvh;
     margin: 0 auto;
     display: flex;
     align-items: center;
