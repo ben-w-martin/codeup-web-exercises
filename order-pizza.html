@@ -54,20 +54,21 @@
                 <button class="nav-link active" id="size-and-crust-tab" data-bs-toggle="tab"
                         data-bs-target="#size-and-crust"
                         type="button" role="tab" aria-controls="size-and-crust" aria-selected="true"><span
-                        class="badge bg-secondary rounded-circle">1</span> Size and Crust
+                        class="badge bg-secondary rounded-circle">1</span><span class="ms-1 d-none d-md-inline-block"> Size and Crust</span>
                 </button>
                 <button class="nav-link" id="cheese-and-sauce-tab" data-bs-toggle="tab"
                         data-bs-target="#cheese-and-sauce"
                         type="button" role="tab" aria-controls="cheese-and-sauce" aria-selected="false"><span
-                        class="badge bg-secondary rounded-circle cheese-and-sauce">2</span> Cheese and Sauce
+                        class="badge bg-secondary rounded-circle cheese-and-sauce">2</span><span
+                        class="ms-1 d-none d-md-inline-block"> Cheese and Sauce</span>
                 </button>
                 <button class="nav-link" id="toppings-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                         type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><span
-                        class="badge bg-secondary rounded-circle">3</span> Toppings
+                        class="badge bg-secondary rounded-circle">3</span><span class="ms-1 d-none d-md-inline-block"> Toppings</span>
                 </button>
             </div>
         </nav>
-        <form class="h" action="#" method="POST">
+        <form class="h" action="https://request-inspector.glitch.me/" method="POST">
             <div class="tab-content card mb-5" id="nav-tabContent">
                 <div class="tab-pane fade show active card" id="size-and-crust" role="tabpanel"
                      aria-labelledby="size-and-crust-tab"
@@ -75,7 +76,7 @@
                     <p class="card-title ps-3 pe-3 pt-2 pb-2 text-bg-primary rounded-top-1">Choose Size and Crust</p>
                     <div class="card-body">
                         <ul class="card input-group list-group">
-                            <li class="list-group-item bg-light">
+                            <li class="list-group-item bg-light card-title">
                                 Hand Tossed
                             </li>
                             <li class="list-group-item">
@@ -165,8 +166,10 @@
                         </ul>
                     </div>
                     <div class="card-footer d-flex justify-content-end">
-                        <button class="btn btn-primary rounded-end-0 ">< Previous</button>
-                        <button class="btn btn-primary rounded-start-0">Next ></button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary rounded-end-0 ">< Previous</button>
+                            <button type="button" class="btn btn-primary rounded-start-0">Next ></button>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade card" id="nav-contact" role="tabpanel" aria-labelledby="toppings-tab"
