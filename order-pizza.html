@@ -103,9 +103,7 @@
                     </ul>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button class="btn btn-primary" id="next-step" data-bs-toggle="tab"
-                            data-bs-target="#cheese-and-sauce"
-                            type="button" role="tab" aria-controls="size-and-crust" aria-selected="true">Next Step ></button>
+                    <button class="btn btn-primary" type="button" id="next-step">Next Step ></button>
                 </div>
             </div>
             <div class="tab-pane fade card" id="cheese-and-sauce" role="tabpanel" aria-labelledby="cheese-and-sauce-tab"
@@ -122,9 +120,10 @@
                         <li class="list-group-item rounded-bottom">
                             <label for="cheese" class="w-100">
                                 <select name="cheese" id="cheese" class="form-select">
-                                    <option value="normal"> Normal</option>
-                                    <option value="more"> More</option>
-                                    <option value="a-lot-more"> A lot more</option>
+                                    <option value="light"> Light</option>
+                                    <option selected value="normal"> Normal</option>
+                                    <option value="extra"> Extra</option>
+                                    <option value="double"> Double</option>
                                 </select>
                             </label>
                         </li>
@@ -136,29 +135,34 @@
                         <li class="list-group-item">
                             What Type?
                         </li>
-                        <li class="list-group-item rounded-bottom">
+                        <li class="list-group-item">
                             <label for="sauce-type" class="w-100">
                                 <select name="sauce-type" id="sauce-type" class="form-select">
-                                    <option value="tom"> Tomato</option>
-                                    <option value="bbq"> Barbeque</option>
-                                    <option value="no-sauce"> No Sauce</option>
+                                    <option value="tomato"> Tomato</option>
+                                    <option value="marinara"> Marinara</option>
+                                    <option value="bbq"> BBQ</option>
+                                    <option value="alfredo"> Alfredo</option>
                                 </select>
                             </label>
+                        </li>
+                        <li class="list-group-item">
+                            How Much?
                         </li>
                         <li class="list-group-item rounded-bottom">
                             <label for="sauce-amt" class="w-100">
                                 <select name="sauce-amt" id="sauce-amt" class="form-select">
-                                    <option value="normal"> Normal</option>
-                                    <option value="more"> More</option>
-                                    <option value="a-lot-more"> A lot more</option>
+                                    <option value="light"> Light</option>
+                                    <option selected value="normal"> Normal</option>
+                                    <option value="extra"> Extra</option>
+                                    <option value="double"> Double</option>
                                 </select>
                             </label>
                         </li>
                     </ul>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button class="btn btn-primary me-1">< Previous</button>
-                    <button class="btn btn-primary ">Next ></button>
+                    <button class="btn btn-primary rounded-end-0 ">< Previous</button>
+                    <button class="btn btn-primary rounded-start-0">Next ></button>
                 </div>
             </div>
             <div class="tab-pane fade card" id="nav-contact" role="tabpanel" aria-labelledby="toppings-tab"
