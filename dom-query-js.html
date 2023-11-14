@@ -3,6 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>DOM: Query and Modify</title>
+    <style>
+        .red {
+            background-color: red;
+        }
+
+        .orange {
+            background-color: orange;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .indigo {
+            background-color: indigo;
+        }
+
+        .violet {
+            background-color: violet;
+        }
+
+        .lightGrey {
+            background-color: #dcdcdc;
+        }
+
+        .medGrey {
+            background-color: #adadad;
+        }
+
+        .grey {
+            background-color: grey;
+        }
+
+        .darkGrey {
+            background-color: #3f3f3f;
+        }
+
+        .black {
+            background-color: #000000;
+        }
+    </style>
 </head>
 <body>
 
@@ -25,45 +74,69 @@
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
 <script>
-        "use strict";
-        // TODO: Uncomment next line and get the main header element by id
-        const mainHeader = document.getElementById("main-header");
+    "use strict";
+    // TODO: Uncomment next line and get the main header element by id
+    const mainHeader = document.getElementById("main-header");
 
-        // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = "JavaScript is Cool";
+    // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+    mainHeader.innerHTML = "JavaScript is Cool";
 
-        // TODO: Uncomment the next line and get the sub header element by id
-        const subHeader = document.getElementById("sub-header");
+    // TODO: Uncomment the next line and get the sub header element by id
+    const subHeader = document.getElementById("sub-header");
 
-        // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = "blue";
+    // TODO: Set the text color of subHeader to blue
+    subHeader.style.color = "blue";
 
-        // TODO: Uncomment the next line and get all list items
-        const listItems = document.getElementsByTagName("li");
+    // TODO: Uncomment the next line and get all list items
+    const listItems = document.getElementsByTagName("li");
 
-        // TODO: Set text color on every other list item to grey
-        for (let i = 0; i < listItems.length; i++) {
-            if (i % 2 === 0) {
-                listItems[i].style.color = "grey";
+    // TODO: Set text color on every other list item to grey
+    for (let i = 0; i < listItems.length; i++) {
+        if (i % 2 === 0) {
+            listItems[i].style.color = "grey";
+        }
+    }
+
+
+    // TODO: Set text color of li with dbid = 1 to blue
+    for (let i = 0; i < listItems.length; i++) {
+        const itemToChange = listItems[i].getAttribute("data-dbid");
+        if (itemToChange === "1") {
+            listItems[i].style.color = "blue";
+        }
+    }
+
+    // TODO: Uncomment the next line and get all elements with class name sub-paragraph
+    const subParagraphs = document.getElementsByClassName("sub-paragraph");
+
+    // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+    subParagraphs[0].innerHTML = "Mission Accomplished!";
+
+    (() => {
+        let flashingColors = confirm("OK for flashing colors [WARNING: FLASHING COLORS]. Cancel for no flashing colors:");
+        if (flashingColors) {
+            const bodyBg = document.querySelector("body");
+            const rainbow = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+            const monochromeColors = ["lightGrey", "medGrey", "grey", "darkGrey", "black"];
+            let i = 0;
+            let colorChoice = confirm("OK for Rainbow. Cancel for Monochrome");
+            let choice = colorChoice ? rainbow : monochromeColors;
+            setInterval(() => toggleBgColor(choice), 100);
+            function toggleBgColor(colScheme) {
+
+                if (i === colScheme.length) {
+                    i = 0;
+                    bodyBg.classList = [];
+                    bodyBg.classList.add(colScheme[i]);
+                    i++;
+                } else {
+                    bodyBg.classList.add(colScheme[i]);
+                    i++;
+                }
+
             }
         }
-
-
-
-        // TODO: Set text color of li with dbid = 1 to blue
-        for (let i = 0; i < listItems.length; i++) {
-            const itemToChange = listItems[i].getAttribute("data-dbid");
-            if (itemToChange === "1") {
-                listItems[i].style.color = "blue";
-            }
-        }
-
-        // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-        const subParagraphs = document.getElementsByClassName("sub-paragraph");
-
-        // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerHTML = "Mission Accomplished!";
-
+    })();
 </script>
 </body>
 </html>
