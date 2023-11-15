@@ -18,7 +18,8 @@
 
     const changeContent = () => {
         let count = 0;
-        let intervalId = setInterval(function () {
+        let intervalId;
+            intervalId = setInterval(function () {
             count++;
             profileCard.classList = [];
             profileCard.classList.add(rainbow[getRandomInt(0, rainbow.length - 1)]);

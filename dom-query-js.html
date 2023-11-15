@@ -4,139 +4,78 @@
     <meta charset="UTF-8">
     <title>DOM: Query and Modify</title>
     <style>
-        .red {
-            background-color: red;
-        }
-
-        .orange {
-            background-color: orange;
-        }
-
-        .yellow {
-            background-color: yellow;
-        }
-
-        .green {
-            background-color: green;
-        }
-
         .blue {
             background-color: blue;
-        }
-
-        .indigo {
-            background-color: indigo;
-        }
-
-        .violet {
-            background-color: violet;
-        }
-
-        .lightGrey {
-            background-color: #dcdcdc;
-        }
-
-        .medGrey {
-            background-color: #adadad;
         }
 
         .grey {
             background-color: grey;
         }
-
-        .darkGrey {
-            background-color: #3f3f3f;
-        }
-
-        .black {
-            background-color: #000000;
-        }
     </style>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
-
-<h1 id="main-header">Hello World!</h1>
-<ul>
-    <li data-dbid="1">Item 1</li>
-    <li data-dbid="2">Item 2</li>
-    <li data-dbid="3">Item 3</li>
-    <li data-dbid="4">Item 4</li>
-    <li data-dbid="5">Item 5</li>
-</ul>
-<h2 id="sub-header">Hello Again.</h2>
-<p class="sub-paragraph">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-    aliquip ex ea commodo consequat. Duis aute irure dolor in
-    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-    culpa qui officia deserunt mollit anim id est laborum.
-</p>
+<main class="container">
+    <h1 id="main-header">Hello World!</h1>
+    <ul>
+        <li data-dbid="1">Item 1</li>
+        <li data-dbid="2">Item 2</li>
+        <li data-dbid="3">Item 3</li>
+        <li data-dbid="4">Item 4</li>
+        <li data-dbid="5">Item 5</li>
+    </ul>
+    <h2 id="sub-header">Hello Again.</h2>
+    <p class="sub-paragraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+        culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <br>
+    <br>
+    <div class="col-6 d-flex flex-column flex-1">
+        <button id="headingOneBtn" class="btn btn-primary my-1">Change Heading</button>
+        <br>
+        <button id="changeListBtn" class="btn btn-primary my-1">Change List Colors</button>
+        <br>
+        <button id="headingTwoBtn" class="btn btn-primary my-1">Change Second Heading</button>
+        <br>
+        <button id="missionBtn" class="btn btn-primary my-1">"Mission Accomplished!"</button>
+    </div>
+</main>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script>
     "use strict";
-    // TODO: Uncomment next line and get the main header element by id
-    const mainHeader = document.getElementById("main-header");
 
-    // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-    mainHeader.innerHTML = "JavaScript is Cool";
+    document.querySelector("#headingOneBtn").addEventListener("click", () => {
+        const mainHeader = document.getElementById("main-header");
+        mainHeader.innerHTML = "JavaScript is Cool";
+    });
 
-    // TODO: Uncomment the next line and get the sub header element by id
-    const subHeader = document.getElementById("sub-header");
-
-    // TODO: Set the text color of subHeader to blue
-    subHeader.style.color = "blue";
-
-    // TODO: Uncomment the next line and get all list items
-    const listItems = document.getElementsByTagName("li");
-
-    // TODO: Set text color on every other list item to grey
-    for (let i = 0; i < listItems.length; i++) {
-        if (i % 2 === 0) {
-            listItems[i].style.color = "grey";
-        }
-    }
-
-
-    // TODO: Set text color of li with dbid = 1 to blue
-    for (let i = 0; i < listItems.length; i++) {
-        const itemToChange = listItems[i].getAttribute("data-dbid");
-        if (itemToChange === "1") {
-            listItems[i].style.color = "blue";
-        }
-    }
-
-    // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-    const subParagraphs = document.getElementsByClassName("sub-paragraph");
-
-    // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-    subParagraphs[0].innerHTML = "Mission Accomplished!";
-
-    (() => {
-        let flashingColors = confirm("OK for flashing colors [WARNING: FLASHING COLORS]. Cancel for no flashing colors:");
-        if (flashingColors) {
-            const bodyBg = document.querySelector("body");
-            const rainbow = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
-            const monochromeColors = ["lightGrey", "medGrey", "grey", "darkGrey", "black"];
-            let i = 0;
-            let colorChoice = confirm("OK for Rainbow. Cancel for Monochrome");
-            let choice = colorChoice ? rainbow : monochromeColors;
-            setInterval(() => toggleBgColor(choice), 100);
-            function toggleBgColor(colScheme) {
-
-                if (i === colScheme.length) {
-                    i = 0;
-                    bodyBg.classList = [];
-                    bodyBg.classList.add(colScheme[i]);
-                    i++;
-                } else {
-                    bodyBg.classList.add(colScheme[i]);
-                    i++;
-                }
-
+    document.querySelector("#changeListBtn").addEventListener("click", () => {
+        const listItems = document.getElementsByTagName("li");
+        for (let i = 0; i < listItems.length; i++) {
+            if (i % 2 !== 0) {
+                listItems[i].style.color = "grey";
+            } else if (listItems[i].dataset.dbid === "1") {
+                listItems[i].style.color = "blue";
             }
         }
-    })();
+    });
+
+    document.querySelector("#headingTwoBtn").addEventListener("click", () => {
+        const subHeader = document.getElementById("sub-header");
+        subHeader.style.color = "blue";
+    });
+
+    document.querySelector("#missionBtn").addEventListener("click", () => {
+        const subParagraphs = document.getElementsByClassName("sub-paragraph");
+        subParagraphs[0].innerHTML = "Mission Accomplished!";
+    });
+
 </script>
 </body>
 </html>
