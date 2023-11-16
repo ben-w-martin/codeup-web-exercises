@@ -37,6 +37,7 @@
     (() => {
         let userInput = [];
         const appear = new Audio("sounds/sound.wav");
+        const hurt = new Audio("sounds/ouch.wav");
         const hit = new Audio("sounds/hit.wav");
         const splosion = new Audio("sounds/splosion.wav");
         const notify = new Audio("sounds/notify.wav");
@@ -64,6 +65,7 @@
             }
             if (healthCount === 0) {
                 splosion.play();
+                hurt.play();
                 document.querySelector("#container").innerHTML = newImage;
                 setTimeout(() => {
                     alert("Victory!");
