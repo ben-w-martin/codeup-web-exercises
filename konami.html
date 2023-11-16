@@ -2,40 +2,143 @@
 <html>
 <head>
     <title>Konami Code</title>
+    <style>
+        .healthBar {
+            display: flex;
+            height: 50px;
+            width: 500px;
+            background-color: rgba(60, 58, 56, 0.22);
+        }
+
+        .block {
+            background-color: red;
+            /*border: 1px solid black;*/
+            width: 100%;
+        }
+
+        .hide {
+            visibility: hidden;
+        }
+
+        img[src*="splosion"] {
+            width: 500px;
+            height: auto;
+        }
+
+    </style>
 </head>
 <body>
 <h1>Konami Code</h1>
-<div></div>
+<div id="container"></div>
+<div id="health"></div>
 
 <script>
     "use strict";
     (() => {
-        function thirtyLives(event) {
-            if (event.key.toString() === "Enter") {
-                userInput = [];
-                alert("You have added 30 lives!");
-                const newImg = document.innerHTML = "<img src='images/wolverine.gif'>";
-                document.querySelector("div").innerHTML = newImg;
-                document.removeEventListener("keyup", thirtyLives);
+        let userInput = [];
+        const appear = new Audio("sounds/sound.wav");
+        const hit = new Audio("sounds/hit.wav");
+        const splosion = new Audio("sounds/splosion.wav");
+        const notify = new Audio("sounds/notify.wav");
+        const health = document.querySelector("#health");
+        let healthBlocks = document.querySelectorAll(".block");
+        let healthCount = 0;
+
+        function displayHealth() {
+            if (!health.classList.contains("healthBar")) {
+                const divsToAdd = [];
+                health.classList.add("healthBar");
+                for (let i = 0; i < healthCount; i++) {
+                    divsToAdd.push("<div class='block'></div>");
+                }
+                health.innerHTML = divsToAdd.join("");
+                    console.log(health);
             }
         }
-        function konami(event) {
+
+        function healthDown() {
+            const newImage = "<img src='images/splosion.gif'>";
+            healthBlocks = document.querySelectorAll(".block");
+            healthBlocks[healthCount].classList.add("hide");
+            if (healthCount === 0) {
+                splosion.play();
+                document.querySelector("#container").innerHTML = newImage;
+                setTimeout(() => {
+                    alert("Victory!");
+                    document.querySelector("#container").innerHTML = "";
+                    health.classList.remove("healthBar");
+                    document.removeEventListener("keydown", punch);
+                }, 1000);
+            }
+        }
+
+        function punch(event) {
+            if (event.key.toString() === "p") {
+                healthCount--;
+                hit.currentTime = 0;
+                hit.play();
+                displayHealth();
+                healthDown();
+            }
+        }
+
+        function thirtyLives(event) {
+            if (event.key.toString() === "Enter") {
+                healthCount = 30;
+                userInput = [];
+                alert("You have given the enemy 30 lives!");
+                setTimeout(() => {
+                    notify.play();
+                    alert("Press 'p' to punch!");
+                }, 3000);
+                const newImg = "<img src='images/wolverine.gif'>";
+                document.querySelector("#container").innerHTML = newImg;
+                document.removeEventListener("keydown", thirtyLives);
+                appear.play();
+                document.addEventListener("keydown", punch);
+            }
+        }
+
+        function burninate(event) {
+            if (event.key.toString() === "Enter") {
+                healthCount = 50;
+                userInput = [];
+                alert("BURNINATE ALL THE PEASANNNNNTS!!!");
+                setTimeout(() => {
+                    notify.play();
+                    alert("Press 'p' to punch!");
+                }, 3000);
+                const newImg = "<img src='images/trogdor.gif'>";
+                document.querySelector("#container").innerHTML = newImg;
+                document.removeEventListener("keydown", burninate);
+                appear.play();
+                document.addEventListener("keydown", punch);
+            }
+        }
+
+        function konamiHandler(event) {
+            // setTimeout(() => {
+            //     userInput = [];
+            // }, 5000);
+            const trogdorCode = ["t", "r", "o", "g", "d", "o", "r"];
             const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
             userInput.push(event.key);
             if (event.key.toString() === "Enter") {
                 userInput = [];
             }
-            if (userInput.join("") === konamiCode.join("")) {
-                console.log("arrays match");
-                document.removeEventListener("keyup", konami);
-                document.addEventListener("keyup", thirtyLives);
+            if (userInput.join("").includes(konamiCode.join(""))) {
+                document.addEventListener("keydown", thirtyLives);
+            }
+            if (userInput.join("").includes(trogdorCode.join(""))) {
+                document.addEventListener("keydown", burninate);
             }
         }
 
-        let userInput = [];
-        document.addEventListener("keyup", konami);
 
-    })();
+        document.addEventListener("keydown", konamiHandler);
+
+    })
+    ();
 </script>
 </body>
 </html>
