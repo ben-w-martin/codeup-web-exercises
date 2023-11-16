@@ -36,45 +36,37 @@
     </p>
     <br>
     <br>
-    <div class="col-6 d-flex flex-column flex-1">
-        <button id="headingOneBtn" class="btn btn-primary my-1">Change Heading</button>
-        <br>
-        <button id="changeListBtn" class="btn btn-primary my-1">Change List Colors</button>
-        <br>
-        <button id="headingTwoBtn" class="btn btn-primary my-1">Change Second Heading</button>
-        <br>
-        <button id="missionBtn" class="btn btn-primary my-1">"Mission Accomplished!"</button>
-    </div>
+<!--    <div class="col-6 d-flex flex-column flex-1">-->
+<!--        <button id="headingOneBtn" class="btn btn-primary my-1">Change Heading</button>-->
+<!--        <br>-->
+<!--        <button id="changeListBtn" class="btn btn-primary my-1">Change List Colors</button>-->
+<!--        <br>-->
+<!--        <button id="headingTwoBtn" class="btn btn-primary my-1">Change Second Heading</button>-->
+<!--        <br>-->
+<!--        <button id="missionBtn" class="btn btn-primary my-1">"Mission Accomplished!"</button>-->
+<!--    </div>-->
 </main>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script>
     "use strict";
 
-    document.querySelector("#headingOneBtn").addEventListener("click", () => {
-        const mainHeader = document.getElementById("main-header");
-        mainHeader.innerHTML = "JavaScript is Cool";
+    document.querySelector("h1").addEventListener("click", function() {
+       this.style.background = "yellow";
     });
 
-    document.querySelector("#changeListBtn").addEventListener("click", () => {
-        const listItems = document.getElementsByTagName("li");
-        for (let i = 0; i < listItems.length; i++) {
-            if (i % 2 !== 0) {
-                listItems[i].style.color = "grey";
-            } else if (listItems[i].dataset.dbid === "1") {
-                listItems[i].style.color = "blue";
-            }
-        }
+    document.querySelector("p").addEventListener("dblclick", function() {
+        this.style.fontSize = "18px";
     });
 
-    document.querySelector("#headingTwoBtn").addEventListener("click", () => {
-        const subHeader = document.getElementById("sub-header");
-        subHeader.style.color = "blue";
-    });
-
-    document.querySelector("#missionBtn").addEventListener("click", () => {
-        const subParagraphs = document.getElementsByClassName("sub-paragraph");
-        subParagraphs[0].innerHTML = "Mission Accomplished!";
-    });
+    const list = document.querySelectorAll("li");
+    for (let item of list) {
+        item.addEventListener("mouseenter", function() {
+        this.style.color = "red";
+            this.addEventListener("mouseleave", function() {
+                this.style.color = "black";
+            })
+        });
+    }
 
 </script>
 </body>
