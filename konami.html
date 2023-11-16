@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+</head>
+<body>
+<h1>Konami Code</h1>
+<div></div>
+
+<script>
+    "use strict";
+    (() => {
+        function thirtyLives(event) {
+            if (event.key.toString() === "Enter") {
+                alert("You have added 30 lives!");
+                const newDiv = document.innerHTML = "<img src='images/fighter.gif.crdownload'>";
+                document.querySelector("div").innerHTML = newDiv;
+
+            }
+        }
+        function konami(event) {
+            const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+            userInput.push(event.key);
+            console.log(userInput);
+            if (userInput.join("") === konamiCode.join("")) {
+                console.log("arrays match");
+                document.removeEventListener("keyup", konami);
+                document.addEventListener("keyup", thirtyLives);
+            }
+        }
+
+        let userInput = [];
+        document.addEventListener("keyup", konami);
+
+    })();
+
+</script>
+</body>
+</html>
