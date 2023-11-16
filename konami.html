@@ -12,16 +12,19 @@
     (() => {
         function thirtyLives(event) {
             if (event.key.toString() === "Enter") {
+                userInput = [];
                 alert("You have added 30 lives!");
-                const newImg = document.innerHTML = "<img src='images/fighter.gif.crdownload'>";
+                const newImg = document.innerHTML = "<img src='images/wolverine.gif'>";
                 document.querySelector("div").innerHTML = newImg;
-
+                document.removeEventListener("keyup", thirtyLives);
             }
         }
         function konami(event) {
             const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
             userInput.push(event.key);
-            console.log(userInput);
+            if (event.key.toString() === "Enter") {
+                userInput = [];
+            }
             if (userInput.join("") === konamiCode.join("")) {
                 console.log("arrays match");
                 document.removeEventListener("keyup", konami);
@@ -33,7 +36,6 @@
         document.addEventListener("keyup", konami);
 
     })();
-
 </script>
 </body>
 </html>
