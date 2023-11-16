@@ -52,14 +52,16 @@
                     divsToAdd.push("<div class='block'></div>");
                 }
                 health.innerHTML = divsToAdd.join("");
-                    console.log(health);
+                healthBlocks = document.querySelectorAll(".block");
             }
         }
 
         function healthDown() {
             const newImage = "<img src='images/splosion.gif'>";
             healthBlocks = document.querySelectorAll(".block");
-            healthBlocks[healthCount].classList.add("hide");
+            if (healthCount >= 0 && healthCount < healthBlocks.length) {
+                healthBlocks[healthCount].classList.add("hide");
+            }
             if (healthCount === 0) {
                 splosion.play();
                 document.querySelector("#container").innerHTML = newImage;
@@ -73,7 +75,7 @@
         }
 
         function punch(event) {
-            if (event.key.toString() === "p") {
+            if (event.key.toString() === " ") {
                 healthCount--;
                 hit.currentTime = 0;
                 hit.play();
@@ -89,8 +91,8 @@
                 alert("You have given the enemy 30 lives!");
                 setTimeout(() => {
                     notify.play();
-                    alert("Press 'p' to punch!");
-                }, 3000);
+                    alert("Press 'spacebar' to punch!");
+                }, 1000);
                 const newImg = "<img src='images/wolverine.gif'>";
                 document.querySelector("#container").innerHTML = newImg;
                 document.removeEventListener("keydown", thirtyLives);
@@ -106,8 +108,8 @@
                 alert("BURNINATE ALL THE PEASANNNNNTS!!!");
                 setTimeout(() => {
                     notify.play();
-                    alert("Press 'p' to punch!");
-                }, 3000);
+                    alert("Press 'spacebar' to punch!");
+                }, 1000);
                 const newImg = "<img src='images/trogdor.gif'>";
                 document.querySelector("#container").innerHTML = newImg;
                 document.removeEventListener("keydown", burninate);
@@ -117,9 +119,6 @@
         }
 
         function konamiHandler(event) {
-            // setTimeout(() => {
-            //     userInput = [];
-            // }, 5000);
             const trogdorCode = ["t", "r", "o", "g", "d", "o", "r"];
             const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
             userInput.push(event.key);
