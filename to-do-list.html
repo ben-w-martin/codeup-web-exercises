@@ -44,17 +44,16 @@
             e.preventDefault();
             const todoVal = document.forms.todoForm.todo.value;
             const newTodo = document.createElement("li");
-            newTodo.innerHTML = `<li class="to-do-item list-group-item d-flex justify-content-between align-items-center">
-            <p class="m-0">${todoVal}</p>
-            <button class="btn btn-danger">Done</button></li>`
+            newTodo.innerHTML = `<p class="m-0">${todoVal}</p>
+            <button class="btn btn-danger">Done</button>`
+            newTodo.classList.add("to-do-item", "list-group-item", "d-flex", "justify-content-between", "align-items-center");
             document.querySelector("#to-do-list").appendChild(newTodo);
-            newTodo.firstElementChild.firstElementChild.nextElementSibling.addEventListener("click", deleteTodo);
+            newTodo.firstElementChild.nextElementSibling.addEventListener("click", deleteTodo);
         }
 
         function deleteTodo(e) {
             e.preventDefault();
-            this.parentElement.parentElement.remove();
-            console.log("delete");
+            this.parentElement.remove();
         }
 
         addBtn.addEventListener("click", addTodo);
