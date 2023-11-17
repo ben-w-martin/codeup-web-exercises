@@ -15,7 +15,7 @@
 
 <!--When any h3 is clicked, the list underneath it should have a fontWeight of "bold". Hint: you should use this in the event listener to access the next sibling of the h3 that is clicked. You can get to the corresponding ul by traversing to the h3's sibling and then it's children.-->
 
-<!--When any list item is clicked, the first li of that list item's parent ul should have a font color of blue. Hint: you should again rely on this in the li event handler.-->
+<!--When any list ul is clicked, the first li of that list ul's parent ul should have a font color of blue. Hint: you should again rely on this in the li event handler.-->
 
 <h1>National Parks FAQ</h1>
 <section id="faqs">
@@ -109,8 +109,32 @@
 </dl>
 <script>
     "use strict";
-    const headers = document.querySelectorAll("#faqs h3");
     (() => {
+        const headers = document.querySelectorAll("#faqs h3");
+        const unorderedLists = getSiblings(headers);
+
+        function getSiblings(nodeList) {
+            let siblingNodeList = [];
+            for (let node of nodeList) {
+                siblingNodeList.push(node.nextElementSibling);
+            }
+            return siblingNodeList;
+        }
+
+        function makeBold() {
+            unorderedLists.forEach(ul => {
+                ul.style.fontWeight = "normal";
+            })
+            this.nextElementSibling.style.fontWeight = "bold";
+        }
+
+        function firstLiBlue() {
+            unorderedLists.forEach(ul => {
+                ul.firstElementChild.style.color = "black";
+            })
+            this.firstElementChild.style.color = "blue";
+        }
+
         document.querySelector("#highlight-last-li").addEventListener("click", (e) => {
             const parent = e.target.parentElement.querySelectorAll("ul");
             parent.forEach(list => {
@@ -125,18 +149,11 @@
         });
 
         headers.forEach(header => {
-            header.addEventListener("click", (e) => {
-                const itemToBold = header.nextElementSibling;
-                headers.forEach(header => {
-                    if (itemToBold.dataset.boldstate === "on") {
-                        itemToBold.dataset.boldstate = "off";
-                    }
-                })
-                if (itemToBold.dataset.boldstate === undefined || itemToBold.dataset.boldstate === "off") {
-                    itemToBold.style.fontWeight = "bold";
-                    itemToBold.dataset.boldstate = "on";
-                }
-            });
+            header.addEventListener("click", makeBold);
+        });
+
+        unorderedLists.forEach(ul => {
+           ul.addEventListener("click", firstLiBlue);
         });
     })();
 
