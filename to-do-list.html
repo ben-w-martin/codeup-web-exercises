@@ -42,13 +42,20 @@
 
         function addTodo(e) {
             e.preventDefault();
-            const todoVal = document.forms.todoForm.todo.value;
-            const newTodo = document.createElement("li");
-            newTodo.innerHTML = `<p class="m-0">${todoVal}</p>
+            let todoVal = document.forms.todoForm.todo.value;
+            let todoCount = document.querySelectorAll(".to-do-item").length;
+            if (todoVal !== "" && todoCount < 10) {
+                const newTodo = document.createElement("li");
+                newTodo.innerHTML = `<p class="m-0">${todoVal}</p>
             <button class="btn btn-danger">Done</button>`
-            newTodo.classList.add("to-do-item", "list-group-item", "d-flex", "justify-content-between", "align-items-center");
-            document.querySelector("#to-do-list").appendChild(newTodo);
-            newTodo.firstElementChild.nextElementSibling.addEventListener("click", deleteTodo);
+                newTodo.classList.add("to-do-item", "list-group-item", "d-flex", "justify-content-between", "align-items-center");
+                document.querySelector("#to-do-list").appendChild(newTodo);
+                newTodo.firstElementChild.nextElementSibling.addEventListener("click", deleteTodo);
+                document.forms.todoForm.todo.value = "";
+            }
+            if (todoCount === 10) {
+                alert("Max of 10 To-do's. Go complete some to-do's before making more items!")
+            }
         }
 
         function deleteTodo(e) {
