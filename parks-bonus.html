@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parks Bonus</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #frame-container {
+            height: 500px
+        }
+
+        #frame-container div:nth-of-type(1) div {
+            background-size: contain;
+        }
+
+        #frame-container div:nth-of-type(2) div {
+            background-size: contain;
+        }
+
+        #frame-container div:nth-of-type(3) div {
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    <section class="row">
+        <h1 class="text-center">DOM Traversal Bonus</h1>
+    </section>
+    <section class="row">
+        <div id="frame-container" class="col-12 p-3 bg-light d-flex justify-content-between">
+            <div class="w-25 d-flex flex-column align-content-center">
+                <div class="mx-1 my-3 border border-5 border-success h-75"></div>
+                <button class="btn btn-primary">SWAP</button>
+            </div>
+            <div class="w-25 d-flex flex-column align-content-center">
+                <div class="mx-1 my-3 border border-5 border-success h-75"></div>
+                <button class="btn btn-primary">SWAP</button>
+            </div>
+            <div class="w-25 d-flex flex-column align-content-center">
+                <div class="mx-1 my-3 border border-5 border-success h-75"></div>
+                <button class="btn btn-primary">SWAP</button>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    "use strict";
+    (() => {
+        // Create 3 divs that each look like a picture frame. Each one should have a unique background image and a button underneath that swaps the image from the frame. Use traversing properties to accomplish this.
+        //
+        //     The rules are the following:
+        //
+        //     When the left picture's button is clicked, the left and center pictures swap images.
+        // When the center picture's button is clicked, the center picture swaps randomly with either the left OR right pictures.
+        // When the right picture's button is clicked, the right and center pictures swap images.
+        // Hint: swap the values of the images' src attributes.
+        const container = document.querySelector("#frame-container");
+        const leftImg = container.firstElementChild.firstElementChild;
+        console.log(leftImg);
+        const centerImg = container.firstElementChild.nextElementSibling.firstElementChild;
+        const rightImg = container.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild;
+        const btns = document.querySelectorAll("button");
+
+        function swapper(e) {
+            if (this.parentElement.firstElementChild === leftImg) {
+                let thisImg = this.parentElement.firstElementChild;
+                // let imgToSwap = centerImg.style.backgroundImage;
+                // console.log(imgToSwap);
+                thisImg.style.backgroundImage = "url('images/wolverine.gif')";
+            }
+            if (this.parentElement.firstElementChild === centerImg) {
+                let thisImg = this.parentElement.firstElementChild;
+                let imgToSwap = centerImg.style.backgroundImage;
+                thisImg.style.backgroundImage = imgToSwap;
+            }
+            if (this.parentElement.firstElementChild === rightImg) {
+                let thisImg = this.parentElement.firstElementChild;
+                let imgToSwap = centerImg.style.backgroundImage;
+                thisImg.style.backgroundImage = imgToSwap;
+            }
+        }
+
+        btns.forEach(btn => {
+            btn.addEventListener("click", swapper);
+        });
+
+
+    })();
+</script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
