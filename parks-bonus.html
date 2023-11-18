@@ -74,9 +74,9 @@
         // When the right picture's button is clicked, the right and center pictures swap images.
         // Hint: swap the values of the images' src attributes.
         const container = document.querySelector("#frame-container");
-        const leftImg = container.firstElementChild.firstElementChild;
+        const leftImg = container.firstElementChild.firstElementChild.firstElementChild;
         const centerImg = container.firstElementChild.nextElementSibling.firstElementChild.firstElementChild;
-        const rightImg = container.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild;
+        const rightImg = container.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild;
         const btns = document.querySelectorAll("button");
 
         function getRandomInt(min, max) {
@@ -88,7 +88,7 @@
         }
 
         function swapper(e) {
-            if (this.parentElement.firstElementChild === leftImg) {
+            if (this.parentElement.firstElementChild.firstElementChild === leftImg) {
                 let thisImg = this.parentElement.firstElementChild.firstElementChild;
                 let prevImg = thisImg.getAttribute("src");
                 thisImg.setAttribute("src", centerImg.getAttribute("src"));
@@ -96,20 +96,19 @@
             }
             if (this.parentElement.firstElementChild.firstElementChild === centerImg) {
                 let randomInt = getRandomInt(0, 1);
-                console.log(randomInt);
                 if (randomInt === 0) {
                     let thisImg = this.parentElement.firstElementChild.firstElementChild;
                     let prevImg = thisImg.getAttribute("src");
                     thisImg.setAttribute("src", rightImg.getAttribute("src"));
-                    centerImg.setAttribute("src", prevImg);
+                    rightImg.setAttribute("src", prevImg);
                 } else {
                     let thisImg = this.parentElement.firstElementChild.firstElementChild;
                     let prevImg = thisImg.getAttribute("src");
                     thisImg.setAttribute("src", leftImg.getAttribute("src"));
-                    centerImg.setAttribute("src", prevImg);
+                    leftImg.setAttribute("src", prevImg);
                 }
             }
-            if (this.parentElement.firstElementChild === rightImg) {
+            if (this.parentElement.firstElementChild.firstElementChild === rightImg) {
                 let thisImg = this.parentElement.firstElementChild.firstElementChild;
                 let prevImg = thisImg.getAttribute("src");
                 thisImg.setAttribute("src", centerImg.getAttribute("src"));
