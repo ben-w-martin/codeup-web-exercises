@@ -1,10 +1,6 @@
 "use strict";
 
 
-
-
-
-
 (() => {
     const users = [
         {
@@ -83,5 +79,17 @@
         return names;
     }, []).join(", ") + ".";
     console.log(userNames);
+
+    // todo Use .reduce to get the unique list of languages from the list of users.
+
+    const uniqueLangs = users.reduce((prevLangs, current) => {
+        for (let lang of current.languages) {
+            if (!prevLangs.includes(lang)) {
+                prevLangs.push(lang);
+            }
+        }
+        return prevLangs;
+    }, []);
+    console.log(uniqueLangs);
 
 })();
