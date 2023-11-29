@@ -3,29 +3,31 @@
 <head>
     <title>Online Store</title>
     <link rel="stylesheet" href="css/ajax-styles.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
-
-<h1>My Tool Store</h1>
-
-<table id="products">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Categories</th>
-    </tr>
-    </thead>
-    <tbody id="insertProducts"></tbody>
-</table>
+<body class="container">
+<header class="bg-secondary text-white p-3">
+    <h1 >My Tool Store</h1>
+</header>
+<main class="rounded-bottom p-3 d-flex justify-content-center">
+    <table id="products" class="border border-secondary border-2">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Categories</th>
+        </tr>
+        </thead>
+        <tbody id="insertProducts"></tbody>
+    </table>
+</main>
 
 <script>
     "use strict";
     // TODO: Create an AJAX GET request for the file under data/inventory.json
     const productTable = document.querySelector("#insertProducts");
     fetch("data/inventory.json").then(resp => resp.json()).then(data => {
-        console.log(data)
         data.forEach(item => {
             const newProduct = document.createElement("tr");
             newProduct.innerHTML = `${createNewTd(item)}`;
@@ -49,5 +51,8 @@
         return newDataArr;
     }
 </script>
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
 </body>
 </html>
