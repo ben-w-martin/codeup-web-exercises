@@ -1,6 +1,8 @@
 main {
     background-color: #fcf5f3;
-    height: 80vh;
+    min-height: 80vh;
+    height: auto;
+    margin-bottom: 1em;
 }
 
 table {
@@ -33,4 +35,18 @@ td:hover {
 
 .post {
     padding: 1em;
+}
+
+.post:nth-of-type(odd) {
+    background-color: rgba(187, 187, 187, 0.22);
+}
+
+.tag {
+    color: #c0c0c0;
+    text-decoration: none;
+    font-size: .8em;
+}
+
+.tag:hover {
+    color: #66ea58;
 }
