@@ -32,11 +32,12 @@
             const header = document.createElement("h3");
             const par = document.createElement("p");
             card.classList = "restaurant bg-white w-100 h-100 p-1";
-            input.addEventListener("click", cardHandler);
+            card.addEventListener("click", cardToRadio);
             input.value = restaurant.name;
             input.name = "restaurant-choice";
             input.type = "radio";
-            header.innerHTML = `<label for="restaurant-choice">${restaurant.name}</label>`;
+            input.style.display = "none";
+            header.innerHTML = `<label id="restaurant-choice" for="restaurant-choice">${restaurant.name}</label>`;
             par.innerText = restaurant.blurb;
             card.appendChild(header);
             card.appendChild(input);
@@ -44,20 +45,32 @@
             div.appendChild(card);
             div.classList = "p-2 bg-secondary mx-md-1 my-1 my-md-0";
             restaurantContainer.appendChild(div);
-            // cardListeners();
         });
     }
 
-    // function cardListeners() {
-    //     const cardRadios = document.querySelectorAll("");
-    // }
-    function cardHandler(e) {
-        const selectedRestaurant = document.forms["restaurant-selector"];
-        console.log(selectedRestaurant);
-        if (this.value === selectedRestaurant) {
-            this.parentElement.classList.remove("bg-white");
-            this.parentElement.classList.add("bg-success");
+    // rerouts event to radio --> cardHandler
+    function cardToRadio() {
+        this.firstElementChild.nextElementSibling.checked = true;
+        cardHandler(this);
+    }
+
+    // styles the selected restaurant card
+    function cardHandler(that) {
+        const thisInput = that.firstElementChild.nextElementSibling;
+        const selectedRestaurant = document.querySelector(`input[name='restaurant-choice']:checked`).value;
+        const restaurants = document.querySelectorAll(".restaurant");
+        if (thisInput.value === selectedRestaurant) {
+            that.classList.remove("bg-white");
+            that.classList.add("bg-success");
+            that.classList.add("text-white");
         }
+        restaurants.forEach(restaurant => {
+            if (that !== restaurant) {
+                restaurant.classList.remove("bg-success");
+                restaurant.classList.remove("text-white");
+                restaurant.classList.add("bg-white");
+            }
+        });
     }
 
     mapboxgl.accessToken = MB_KEY;
