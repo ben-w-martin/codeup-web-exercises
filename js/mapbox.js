@@ -2,15 +2,70 @@
 
 (() => {
     const zoomRadios = document.querySelectorAll("#zoom-buttons input");
-    const mingsAddress = "914 E Elmira St, San Antonio, TX 78212";
-    let mingsCoordinates = geocode(mingsAddress, MB_KEY);
-    let zoomLevel = 5;
+    const centerOfAmerica = geocode("201 SW 8th Ave, Topeka, KS 66603", MB_KEY);
+    const restaurantContainer = document.querySelector(".restaurants-container");
+    let zoomLevel = 3;
+    const favRestaurants = [
+        {
+            name: "Ming's",
+            address: "914 E Elmira St, San Antonio, TX 78212",
+            popupHTML: "<p>Mings: World's Greatest Bao Buns</p>",
+            blurb: "lorem ipsum schmipsum horem blurbum words hey."
+        }, {
+            name: "Muse Coffee",
+            address: "1509 Enterprise Dr, Lynchburg, VA 24502",
+            popupHTML: "<p>The Muse Coffee Co. And Roastery</p>",
+            blurb: "lorem ipsum schmipsum horem blurbum words hey."
+        }, {
+            name: "Pine Coffee Supply",
+            address: "47 W Pine St, Pinedale, WY 82941",
+            popupHTML: "<p>Delicious Coffee by the Grand Tetons</p>",
+            blurb: "lorem ipsum schmipsum horem blurbum words hey."
+        }
+    ];
+
+    function renderRestaurants(restaurants) {
+        restaurants.forEach(restaurant => {
+            const div = document.createElement("div");
+            const input = document.createElement("input");
+            const card = document.createElement("div");
+            const header = document.createElement("h3");
+            const par = document.createElement("p");
+            card.classList = "restaurant bg-white w-100 h-100 p-1";
+            input.addEventListener("click", cardHandler);
+            input.value = restaurant.name;
+            input.name = "restaurant-choice";
+            input.type = "radio";
+            header.innerHTML = `<label for="restaurant-choice">${restaurant.name}</label>`;
+            par.innerText = restaurant.blurb;
+            card.appendChild(header);
+            card.appendChild(input);
+            card.appendChild(par);
+            div.appendChild(card);
+            div.classList = "p-2 bg-secondary mx-md-1 my-1 my-md-0";
+            restaurantContainer.appendChild(div);
+            // cardListeners();
+        });
+    }
+
+    // function cardListeners() {
+    //     const cardRadios = document.querySelectorAll("");
+    // }
+    function cardHandler(e) {
+        const selectedRestaurant = document.forms["restaurant-selector"];
+        console.log(selectedRestaurant);
+        if (this.value === selectedRestaurant) {
+            this.parentElement.classList.remove("bg-white");
+            this.parentElement.classList.add("bg-success");
+        }
+    }
+
     mapboxgl.accessToken = MB_KEY;
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-98.4916, 29.4252], // starting position [lng, lat]
-        zoom: 9, // starting zoom
+        center: [-95, 39], // starting position [lng, lat]
+        zoom: zoomLevel, // starting zoom
     });
     map.addControl(new mapboxgl.NavigationControl());
 
@@ -32,30 +87,28 @@
             .then(data => data.features[0].place_name);
     }
 
-    geocode(mingsAddress, MB_KEY).then( result => {
-        console.log(result);
-        map.setCenter(result);
-        map.setZoom(zoomLevel);
-    });
-
-    const mingsInfo = {
-        address: mingsAddress,
-        popupHTML: "<p>Mings:<br>World's Greatest Bao Buns</p>"
-    };
+    // geocode(favRestaurants[0].address, MB_KEY).then(result => {
+    //     console.log(result);
+    //     map.setCenter(result);
+    //     map.setZoom(zoomLevel);
+    // });
 
     function placeMarkerAndPopup(info, token, map) {
-        geocode(info.address, token).then( coords => {
-            let popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
-            let marker = new mapboxgl.Marker()
-                .setLngLat(coords)
-                .addTo(map)
-                .setPopup(popup);
-            popup.addTo(map);
+        info.forEach(restaurant => {
+            geocode(restaurant.address, token).then(coords => {
+                let popup = new mapboxgl.Popup()
+                    .setHTML(restaurant.popupHTML);
+                let marker = new mapboxgl.Marker()
+                    .setLngLat(coords)
+                    .addTo(map)
+                    .setPopup(popup);
+                popup.addTo(map);
+            });
         });
     }
 
-    placeMarkerAndPopup(mingsInfo, MB_KEY, map);
+    placeMarkerAndPopup(favRestaurants, MB_KEY, map);
+    renderRestaurants(favRestaurants);
 
     zoomRadios.forEach(rad => {
         rad.addEventListener("change", function (e) {
@@ -67,7 +120,7 @@
             } else if (e.target.value === "zoom20") {
                 zoomLevel = 20;
             }
-            geocode(mingsAddress, MB_KEY).then( result => {
+            geocode(favRestaurants[0].address, MB_KEY).then(result => {
                 map.setCenter(result);
                 map.setZoom(zoomLevel);
             });
