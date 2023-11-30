@@ -45,7 +45,6 @@
         newDataArr.push(item.title);
         newDataArr.push(item.quantity);
         newDataArr.push(item.price);
-        // newDataArr.push(item.categories);
         newDataArr.push(item.categories.join(", "));
         newDataArr = `<td>${newDataArr.join("</td><td>")}</td>`
         return newDataArr;
