@@ -7,6 +7,7 @@
         const commitsByDate = [];
         let date = "";
         fetch(`https://api.github.com/users/${username}/events/public`, {headers: {'Authorization': `token ${GH_KEY}`}}).then(response => response.json()).then(data => {
+            console.log(data)
             data.forEach(item => {
                 if ("commits" in item.payload) {
                     commitsByDate.push(item.created_at);
