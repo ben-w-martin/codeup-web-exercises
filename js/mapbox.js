@@ -92,7 +92,7 @@
     }
 
     function getCurrentRestaurant() {
-        const selectedRestaurant = zoomSlider.value;
+        const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
         favRestaurants.forEach(store => {
             if (store.name === selectedRestaurant) {
                 runGeocode(store.address, MB_KEY);
