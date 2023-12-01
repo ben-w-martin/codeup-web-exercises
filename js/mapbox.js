@@ -9,7 +9,7 @@
         {
             name: "Ming's",
             address: "914 E Elmira St, San Antonio, TX 78212",
-            popupHTML: "<p>Mings: World's Greatest Bao Buns. Chinese fusion in the heart of San Antonio.</p>",
+            popupHTML: "<p>World's Greatest Bao Buns. Chinese fusion in the heart of San Antonio.</p>",
             blurb: "914 East Elmira Street\n" +
                 "San Antonio, TX 78212\n" +
                 "(210) 600-4083\n" +
@@ -19,7 +19,7 @@
         }, {
             name: "The Muse",
             address: "1509 Enterprise Dr Lynchburg, VA 24502",
-            popupHTML: "<p>The Muse Coffee Co. And Roastery. Fresh roasted coffee and breakfast food.</p>",
+            popupHTML: "<p>The Muse Coffee Co. and Roastery. Fresh roasted coffee and breakfast food.</p>",
             blurb: "1509 Enterprise Drive\n" +
                 "Lynchburg, VA 24502\n" +
                 "(434) 237-8878\n" +
