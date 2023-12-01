@@ -3,6 +3,7 @@
 (() => {
     const mapContainer = document.querySelector("#map");
     const weatherContainer = document.querySelector("#weather-container");
+    const homeLngLat = {lng: -79.14397251288815, lat: 37.410942615370175};
 
     // render map-------------------------------------------------------------------
     mapboxgl.accessToken = MB_KEY;
@@ -10,34 +11,40 @@
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/satellite-streets-v12',
-        center: [-79.1, 37.4],
+        center: [homeLngLat.lng, homeLngLat.lat],
         zoom: 3
     });
 
     // render weather---------------------------------------------------------------
-    function renderWeather(coords) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?` +
-            `lat=29.426825118534886&lon=-98.48948239256946` + `&appid=${OW_KEY}`)
-            .then( data => data.json())
-            .then( currentWeather => console.log(currentWeather));
-        // let lng = coords[0];
-        // let lat = coords[1];
-        // fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${OW_KEY}`)
-        //     .then(resp => resp.json())
-        //     .then( data => console.log(data));
+    function getWeather(coords) {
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng}&appid=${OW_KEY}`)
+            .then(data => data.json())
+            .then(currentWeather => renderWeather(currentWeather));
+    }
+
+    function renderWeather(weather) {
+        console.log(weather);
+        const weatherCards = document.createElement("div");
+        const weatherCard = document.createElement("div");
+        const forecast = document.createElement("h3");
+        const icon = document.createElement("img");
+        weatherCards.classList = "d-md-flex";
+        weatherCards.appendChild(weatherCard);
+        weatherContainer.appendChild(weatherCards);
     }
 
     const marker = new mapboxgl.Marker({
         draggable: true
     })
-        .setLngLat([-79.1, 37.4])
+        .setLngLat([homeLngLat.lng, homeLngLat.lat])
         .addTo(map);
 
     // Sets coords on map. Retrieves city, sends to be rendered---------------------
     async function onDragEnd() {
         const lngLat = marker.getLngLat();
-        renderWeather(lngLat);
-        let city = await reverseGeocode(lngLat, MB_KEY);
+        getWeather(lngLat);
+        let city = await reverseGeocode(lngLat);
+        console.log("from onDragEnd: ", city);
         coordinates.style.display = 'block';
         coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
         renderCity(city);
@@ -61,22 +68,33 @@
             .then(data => data.features[0].center);
     }
 
-    async function reverseGeocode(coordinates, token) {
-        var baseUrl = 'https://api.mapbox.com';
-        var endPoint = '/geocoding/v5/mapbox.places/';
-        const response = await fetch(`${baseUrl}${endPoint}${coordinates.lng},${coordinates.lat}.json?access_token=${token}`)
-            .then(res => res.json());
-        // console.log(response.features);
-        let place = "";
-        let region = "";
-        response.features.forEach(feature => {
-            if (feature.id.includes("place")) {
-                place = feature.text;
-            } else if (feature.id.includes("region")) {
-                region = feature.text;
-            }
-        })
-        return `${place}, ${region}`;
+    async function reverseGeocode(coords) {
+        const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${coords.lat}&lon=${coords.lng}&limit=5&appid=${OW_KEY}`)
+            .then(resp => resp.json())
+            .then(data => {
+                // console.log(`From revGeocode: ${data[0].name}, ${data[0].state}`);
+                return data[0];
+            });
+        console.log(response);
+        return `${response.name}, ${response.state}`;
     }
+
+    // async function reverseGeocode(coordinates, token) {
+    //     var baseUrl = 'https://api.mapbox.com';
+    //     var endPoint = '/geocoding/v5/mapbox.places/';
+    //     const response = await fetch(`${baseUrl}${endPoint}${coordinates.lng},${coordinates.lat}.json?access_token=${token}`)
+    //         .then(res => res.json());
+    //     // console.log(response.features);
+    //     let place = "";
+    //     let region = "";
+    //     response.features.forEach(feature => {
+    //         if (feature.id.includes("place")) {
+    //             place = feature.text;
+    //         } else if (feature.id.includes("region")) {
+    //             region = feature.text;
+    //         }
+    //     })
+    //     return `${place}, ${region}`;
+    // }
 
 })();
