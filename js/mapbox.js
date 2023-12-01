@@ -60,7 +60,10 @@
             card.appendChild(input);
             card.appendChild(par);
             div.appendChild(card);
+
             div.classList = "col-md-3 p-2 bg-secondary my-1 my-md-0";
+
+
             restaurantContainer.appendChild(div);
         });
     }
