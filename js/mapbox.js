@@ -9,17 +9,17 @@
         {
             name: "Ming's",
             address: "914 E Elmira St, San Antonio, TX 78212",
-            popupHTML: "<p>Mings: World's Greatest Bao Buns</p>",
+            popupHTML: "<p>Mings: World's Greatest Bao Buns. Chinese fusion in the heart of San Antonio.</p>",
             blurb: "lorem ipsum schmipsum horem blurbum words hey."
         }, {
             name: "The Muse",
             address: "1509 Enterprise Dr, Lynchburg, VA 24502",
-            popupHTML: "<p>The Muse Coffee Co. And Roastery</p>",
+            popupHTML: "<p>The Muse Coffee Co. And Roastery. Fresh roasted coffee and breakfast food.</p>",
             blurb: "lorem ipsum schmipsum horem blurbum words hey."
         }, {
             name: "Pine Coffee Supply",
             address: "47 W Pine St, Pinedale, WY 82941",
-            popupHTML: "<p>Delicious Coffee by the Grand Tetons</p>",
+            popupHTML: "<p>Delicious Specialty Coffee right under the Grand Tetons.</p>",
             blurb: "lorem ipsum schmipsum horem blurbum words hey."
         }
     ];
