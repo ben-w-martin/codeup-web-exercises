@@ -21,19 +21,18 @@ main {
 }
 
 #map-container {
-
+    position: relative;
 }
 
 #map {
-    position: relative;
 }
 
 .coordinates {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     position: absolute;
-    bottom: 40px;
-    left: 10px;
+    bottom: 50px;
+    left: 25px;
     padding: 5px 10px;
     margin: 0;
     font-size: 11px;
