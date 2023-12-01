@@ -35,6 +35,7 @@
     }
 
     // constructs array of weather objects to be rendered
+    // todo temp min needs to be lowest temp for the day. Maybe it's own function
     async function constructWeatherArr(data) {
         const response = await data.list;
         console.log(response)
@@ -43,7 +44,7 @@
         for (let i = 0; i < response.length; i += 8) {
             weatherObj = {
                 dt: response[i].dt,
-                high: temperatureToggle(response[i].main.temp_max),
+                currentTemp: temperatureToggle(response[i].main.temp_max),
                 low: temperatureToggle(response[i].main.temp_min),
                 feelsLike: temperatureToggle(response[i].main.feels_like),
                 rain: response[i].rain, // **
@@ -60,24 +61,27 @@
     }
 
     function renderWeather(weatherArr) {
-        console.log(weatherArr);
         const weatherCardContainer = document.createElement("div");
         weatherContainer.innerHTML = "";
         for (let i = 0; i < weatherArr.length; i++) {
             const current = weatherArr[i];
             const weatherCard = document.createElement("div");
+            const date = document.createElement("p");
             const description = document.createElement("h3");
             const subDescription = document.createElement("p");
             const icon = document.createElement("img");
             const tempDiv = document.createElement("div");
+            date.innerHTML = new Date(current.dt * 1000).toDateString();
             description.innerText = current.description;
             subDescription.innerText = current.subDescription;
+            subDescription.style.fontSize = "0.8em";
             icon.src = `https://openweathermap.org/img/wn/${current.icon}@2x.png`;
-            tempDiv.classList = "d-flex justify-content-between"
-            tempDiv.innerHTML = `<p>${current.high[1]}</p><p>${current.low[1]}</p>`
+            tempDiv.classList = "d-flex justify-content-between flex-wrap"
+            tempDiv.innerHTML = `<p class="col-12">Currently: ${current.currentTemp[1]}</p><br /><p>High&uarr;</p><p>Low&darr;</p>`
+            weatherCard.appendChild(date);
             weatherCard.appendChild(description);
-            weatherCard.appendChild(subDescription);
             weatherCard.appendChild(icon);
+            weatherCard.appendChild(subDescription);
             weatherCard.appendChild(tempDiv);
             weatherCardContainer.appendChild(weatherCard);
         }
