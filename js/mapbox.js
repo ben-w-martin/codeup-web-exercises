@@ -12,7 +12,7 @@
             popupHTML: "<p>Mings: World's Greatest Bao Buns</p>",
             blurb: "lorem ipsum schmipsum horem blurbum words hey."
         }, {
-            name: "Muse Coffee",
+            name: "The Muse",
             address: "1509 Enterprise Dr, Lynchburg, VA 24502",
             popupHTML: "<p>The Muse Coffee Co. And Roastery</p>",
             blurb: "lorem ipsum schmipsum horem blurbum words hey."
@@ -51,15 +51,15 @@
     // rerouts event to radio --> cardHandler
     function cardToRadio() {
         this.firstElementChild.nextElementSibling.checked = true;
-        cardHandler(this);
+        radioCards(this);
     }
 
     // styles the selected restaurant card
-    function cardHandler(that) {
-        const thisInput = that.firstElementChild.nextElementSibling;
+    function radioCards(that) {
+        const thatInput = that.firstElementChild.nextElementSibling;
         const selectedRestaurant = document.querySelector(`input[name='restaurant-choice']:checked`).value;
         const restaurants = document.querySelectorAll(".restaurant");
-        if (thisInput.value === selectedRestaurant) {
+        if (thatInput.value === selectedRestaurant) {
             that.classList.remove("bg-white");
             that.classList.add("bg-success");
             that.classList.add("text-white");
@@ -71,6 +71,17 @@
                 restaurant.classList.add("bg-white");
             }
         });
+        getCurrentRestaurant();
+    }
+
+    function getCurrentRestaurant() {
+        const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
+        favRestaurants.forEach(store => {
+            if (store.name === selectedRestaurant) {
+                runGeocode(store.address, MB_KEY);
+                placePopup(store, MB_KEY, map);
+            }
+        })
     }
 
     mapboxgl.accessToken = MB_KEY;
@@ -100,31 +111,42 @@
             .then(data => data.features[0].place_name);
     }
 
-    // geocode(favRestaurants[0].address, MB_KEY).then(result => {
-    //     console.log(result);
-    //     map.setCenter(result);
-    //     map.setZoom(zoomLevel);
-    // });
+    function runGeocode(search, token) {
+        geocode(search, token).then(result => {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(zoomLevel);
+        });
+    }
 
-    function placeMarkerAndPopup(info, token, map) {
+    function placeMarker(info, token, map) {
         info.forEach(restaurant => {
             geocode(restaurant.address, token).then(coords => {
-                let popup = new mapboxgl.Popup()
-                    .setHTML(restaurant.popupHTML);
                 let marker = new mapboxgl.Marker()
                     .setLngLat(coords)
                     .addTo(map)
-                    .setPopup(popup);
-                popup.addTo(map);
             });
         });
     }
 
-    placeMarkerAndPopup(favRestaurants, MB_KEY, map);
+    function placePopup(info, token, map) {
+        geocode(info.address, token).then(coords => {
+            let popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
+            let marker = new mapboxgl.Marker()
+                .setLngLat(coords)
+                .addTo(map)
+                .setPopup(popup);
+            popup.addTo(map);
+        });
+    }
+
     renderRestaurants(favRestaurants);
+    placeMarker(favRestaurants, MB_KEY, map);
 
     zoomRadios.forEach(rad => {
         rad.addEventListener("change", function (e) {
+            const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
             // const selectedZoom = document.querySelector("")
             if (e.target.value === "zoom5") {
                 zoomLevel = 5;
@@ -133,10 +155,7 @@
             } else if (e.target.value === "zoom20") {
                 zoomLevel = 20;
             }
-            geocode(favRestaurants[0].address, MB_KEY).then(result => {
-                map.setCenter(result);
-                map.setZoom(zoomLevel);
-            });
+            getCurrentRestaurant();
         })
     })
 })();
