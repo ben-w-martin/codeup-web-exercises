@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-    const zoomRadios = document.querySelectorAll("#zoom-buttons input");
+    const zoomSlider = document.querySelector("#zoom");
     const centerOfAmerica = geocode("201 SW 8th Ave, Topeka, KS 66603", MB_KEY);
     const restaurantContainer = document.querySelector(".restaurants-container");
     let zoomLevel = 3;
@@ -10,17 +10,34 @@
             name: "Ming's",
             address: "914 E Elmira St, San Antonio, TX 78212",
             popupHTML: "<p>Mings: World's Greatest Bao Buns. Chinese fusion in the heart of San Antonio.</p>",
-            blurb: "lorem ipsum schmipsum horem blurbum words hey."
+            blurb: "914 East Elmira Street\n" +
+                "San Antonio, TX 78212\n" +
+                "(210) 600-4083\n" +
+                "\n" +
+                "T - S | 11:00am - 10:00pm\n" +
+                "Closed on Monday\n"
         }, {
             name: "The Muse",
-            address: "1509 Enterprise Dr, Lynchburg, VA 24502",
+            address: "1509 Enterprise Dr Lynchburg, VA 24502",
             popupHTML: "<p>The Muse Coffee Co. And Roastery. Fresh roasted coffee and breakfast food.</p>",
-            blurb: "lorem ipsum schmipsum horem blurbum words hey."
+            blurb: "1509 Enterprise Drive\n" +
+                "Lynchburg, VA 24502\n" +
+                "(434) 237-8878\n" +
+                "\n" +
+                "M–F | 7:00am – 7:00pm\n" +
+                "Saturday 8:00am - 7:00pm\n" +
+                "Closed Sunday"
         }, {
             name: "Pine Coffee Supply",
             address: "47 W Pine St, Pinedale, WY 82941",
             popupHTML: "<p>Delicious Specialty Coffee right under the Grand Tetons.</p>",
-            blurb: "lorem ipsum schmipsum horem blurbum words hey."
+            blurb: "47 W Pine St\n" +
+                "Pinedale, WY 82941\n" +
+                "(307) 367-4343" +
+                "\n" +
+                "\n" +
+                "M-F | 7:30am - 2:30pm\n" +
+                " Sun 8:00am - 2:00pm"
         }
     ];
 
@@ -43,7 +60,7 @@
             card.appendChild(input);
             card.appendChild(par);
             div.appendChild(card);
-            div.classList = "p-2 bg-secondary mx-md-1 my-1 my-md-0";
+            div.classList = "col-md-3 p-2 bg-secondary my-1 my-md-0";
             restaurantContainer.appendChild(div);
         });
     }
@@ -75,7 +92,7 @@
     }
 
     function getCurrentRestaurant() {
-        const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
+        const selectedRestaurant = zoomSlider.value;
         favRestaurants.forEach(store => {
             if (store.name === selectedRestaurant) {
                 runGeocode(store.address, MB_KEY);
@@ -141,21 +158,22 @@
         });
     }
 
+    function getZoomLevel() {
+        // const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
+        if (this !== undefined) {
+            zoomLevel = zoomSlider.value;
+            console.log(zoomLevel);
+            getCurrentRestaurant();
+            map.setZoom(+zoomLevel);
+        } else {
+            zoomLevel = 3;
+        }
+        return zoomLevel;
+
+    }
+
     renderRestaurants(favRestaurants);
     placeMarker(favRestaurants, MB_KEY, map);
 
-    zoomRadios.forEach(rad => {
-        rad.addEventListener("change", function (e) {
-            const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
-            // const selectedZoom = document.querySelector("")
-            if (e.target.value === "zoom5") {
-                zoomLevel = 5;
-            } else if (e.target.value === "zoom15") {
-                zoomLevel = 15;
-            } else if (e.target.value === "zoom20") {
-                zoomLevel = 20;
-            }
-            getCurrentRestaurant();
-        })
-    })
+    zoomSlider.addEventListener("change", getZoomLevel);
 })();
