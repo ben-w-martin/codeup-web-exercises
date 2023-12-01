@@ -1,26 +1,33 @@
 :root {
-
+    --bg-color: #134074;
+    --bg-color-secondary: #13315C;
+    --bg-color-header: #0B2545;
+    --text-color-main: #EEF4ED;
+    --accent-color: #8DA9C4;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
 
 body {
+    background-color: var(--bg-color);
     color: whitesmoke !important;
 }
 
 header {
-    background-color: #a0ec98;
+    background-color: var(--bg-color-header);
 }
 
 main {
+    background-color: var(--bg-color-secondary);
     min-height: 80vh;
 }
 
 #map-container {
+    background-color: var(--accent-color);
     position: relative;
 }
 
