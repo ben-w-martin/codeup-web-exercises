@@ -4,6 +4,19 @@
     const mapContainer = document.querySelector("#map");
     const weatherContainer = document.querySelector("#weather-container");
     const homeLngLat = {lng: -79.14397251288815, lat: 37.410942615370175};
+    let weatherObj = {
+        dt: 0, // dt
+        high: 0, // main.temp_max
+        low: 0, // main.temp_min
+        feelsLike: 0, // main.feels_like
+        rain: 0, // main.rain.3h
+        humidity: 0, // main.humidity
+        description: "", // weather[0].main
+        subDescription: "", // weather[0].description
+        icon: "", // weather[0].icon
+        windSpeed: 0, // wind[0].speed
+        windDir: 0 // wind[0].deg
+    };
 
     // render map-------------------------------------------------------------------
     mapboxgl.accessToken = MB_KEY;
@@ -19,11 +32,38 @@
     function getWeather(coords) {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng}&appid=${OW_KEY}`)
             .then(data => data.json())
-            .then(currentWeather => renderWeather(currentWeather));
+            .then(currentWeather => constructWeatherObj(currentWeather));
     }
 
-    function renderWeather(weather) {
-        console.log(weather);
+    getWeather(homeLngLat);
+
+    function kelvinToFahrenheit(num) {
+
+    }
+
+    async function constructWeatherObj(data) {
+        const response = await data.list;
+        console.log(response);
+        for (let i = 0; i < response.length; i += 8) {
+            weatherObj = {
+                dt: response[i].dt,
+                high: response[i].main.temp_max,
+                low: response[i].main.temp_min,
+                feelsLike: response[i].main.feels_like,
+                rain: response[i].rain, // **
+                humidity: response[i].main.humidity,
+                description: response[i].weather[0].main,
+                subDescription: response[i].weather[0].description,
+                icon: response[i].weather[0].icon,
+                windSpeed: response[i].wind.speed,
+                windDir: response[i].wind.deg
+            };
+        }
+        renderWeather(weatherObj)
+    }
+
+    function renderWeather(weatherObj) {
+        console.log(weatherObj);
         const weatherCardContainer = document.createElement("div");
         const weatherCard = document.createElement("div");
         const forecast = document.createElement("h3");
