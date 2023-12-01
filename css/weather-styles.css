@@ -1,0 +1,42 @@
+:root {
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: whitesmoke !important;
+}
+
+header {
+    background-color: #a0ec98;
+}
+
+main {
+    min-height: 80vh;
+}
+
+#map-container {
+    position: relative;
+}
+
+#map {
+}
+
+.coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    bottom: 50px;
+    left: 25px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    /*display: none;*/
+}
