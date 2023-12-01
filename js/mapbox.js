@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-    const zoomRadios = document.querySelectorAll("#zoom-buttons input");
+    const zoomSlider = document.querySelector("#zoom");
     const centerOfAmerica = geocode("201 SW 8th Ave, Topeka, KS 66603", MB_KEY);
     const restaurantContainer = document.querySelector(".restaurants-container");
     let zoomLevel = 3;
@@ -18,7 +18,7 @@
                 "Closed on Monday\n"
         }, {
             name: "The Muse",
-            address: "1509 Enterprise Dr, Lynchburg, VA 24502",
+            address: "1509 Enterprise Dr Lynchburg, VA 24502",
             popupHTML: "<p>The Muse Coffee Co. And Roastery. Fresh roasted coffee and breakfast food.</p>",
             blurb: "1509 Enterprise Drive\n" +
                 "Lynchburg, VA 24502\n" +
@@ -60,7 +60,10 @@
             card.appendChild(input);
             card.appendChild(par);
             div.appendChild(card);
-            div.classList = "col-md-3 p-2 bg-secondary mx-md-1 my-1 my-md-0";
+
+            div.classList = "col-md-3 p-2 bg-secondary my-1 my-md-0";
+
+
             restaurantContainer.appendChild(div);
         });
     }
@@ -158,21 +161,22 @@
         });
     }
 
+    function getZoomLevel() {
+        // const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
+        if (this !== undefined) {
+            zoomLevel = zoomSlider.value;
+            console.log(zoomLevel);
+            getCurrentRestaurant();
+            map.setZoom(+zoomLevel);
+        } else {
+            zoomLevel = 3;
+        }
+        return zoomLevel;
+
+    }
+
     renderRestaurants(favRestaurants);
     placeMarker(favRestaurants, MB_KEY, map);
 
-    zoomRadios.forEach(rad => {
-        rad.addEventListener("change", function (e) {
-            const selectedRestaurant = document.querySelector(`input[name="restaurant-choice"]:checked`).value;
-            // const selectedZoom = document.querySelector("")
-            if (e.target.value === "zoom5") {
-                zoomLevel = 5;
-            } else if (e.target.value === "zoom15") {
-                zoomLevel = 15;
-            } else if (e.target.value === "zoom20") {
-                zoomLevel = 20;
-            }
-            getCurrentRestaurant();
-        })
-    })
+    zoomSlider.addEventListener("change", getZoomLevel);
 })();
