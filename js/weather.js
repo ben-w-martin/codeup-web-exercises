@@ -2,7 +2,9 @@
 
 (() => {
     const mapContainer = document.querySelector("#map");
-    // render map------------------------------------------------------------------
+    const weatherContainer = document.querySelector("#weather-container");
+
+    // render map-------------------------------------------------------------------
     mapboxgl.accessToken = MB_KEY;
     const coordinates = document.getElementById('coordinates');
     const map = new mapboxgl.Map({
@@ -12,14 +14,29 @@
         zoom: 3
     });
 
+    // render weather---------------------------------------------------------------
+    function renderWeather(coords) {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?` +
+            `lat=29.426825118534886&lon=-98.48948239256946` + `&appid=${OW_KEY}`)
+            .then( data => data.json())
+            .then( currentWeather => console.log(currentWeather));
+        // let lng = coords[0];
+        // let lat = coords[1];
+        // fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${OW_KEY}`)
+        //     .then(resp => resp.json())
+        //     .then( data => console.log(data));
+    }
+
     const marker = new mapboxgl.Marker({
         draggable: true
     })
         .setLngLat([-79.1, 37.4])
         .addTo(map);
 
+    // Sets coords on map. Retrieves city, sends to be rendered---------------------
     async function onDragEnd() {
         const lngLat = marker.getLngLat();
+        renderWeather(lngLat);
         let city = await reverseGeocode(lngLat, MB_KEY);
         coordinates.style.display = 'block';
         coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
@@ -27,8 +44,9 @@
     }
 
     function renderCity(city) {
-        let currentCity = document.querySelector(".city");
+        const currentCity = document.querySelector(".city");
         currentCity.innerText = city;
+        return city;
     }
 
     marker.on('dragend', onDragEnd);
@@ -49,7 +67,16 @@
         const response = await fetch(`${baseUrl}${endPoint}${coordinates.lng},${coordinates.lat}.json?access_token=${token}`)
             .then(res => res.json());
         // console.log(response.features);
-        return `${response.features[2].text}, ${response.features[4].text}`;
+        let place = "";
+        let region = "";
+        response.features.forEach(feature => {
+            if (feature.id.includes("place")) {
+                place = feature.text;
+            } else if (feature.id.includes("region")) {
+                region = feature.text;
+            }
+        })
+        return `${place}, ${region}`;
     }
 
 })();
