@@ -24,13 +24,12 @@
 
     function renderWeather(weather) {
         console.log(weather);
-        const weatherCards = document.createElement("div");
+        const weatherCardContainer = document.createElement("div");
         const weatherCard = document.createElement("div");
         const forecast = document.createElement("h3");
         const icon = document.createElement("img");
-        weatherCards.classList = "d-md-flex";
-        weatherCards.appendChild(weatherCard);
-        weatherContainer.appendChild(weatherCards);
+        weatherCardContainer.classList = "d-md-flex";
+        weatherContainer.appendChild(weatherCardContainer);
     }
 
     const marker = new mapboxgl.Marker({
@@ -44,8 +43,7 @@
         const lngLat = marker.getLngLat();
         getWeather(lngLat);
         let city = await reverseGeocode(lngLat);
-        console.log("from onDragEnd: ", city);
-        coordinates.style.display = 'block';
+        coordinates.classList.add("d-none", "d-md-block");
         coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
         renderCity(city);
     }
@@ -72,29 +70,8 @@
         const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${coords.lat}&lon=${coords.lng}&limit=5&appid=${OW_KEY}`)
             .then(resp => resp.json())
             .then(data => {
-                // console.log(`From revGeocode: ${data[0].name}, ${data[0].state}`);
                 return data[0];
             });
-        console.log(response);
         return `${response.name}, ${response.state}`;
     }
-
-    // async function reverseGeocode(coordinates, token) {
-    //     var baseUrl = 'https://api.mapbox.com';
-    //     var endPoint = '/geocoding/v5/mapbox.places/';
-    //     const response = await fetch(`${baseUrl}${endPoint}${coordinates.lng},${coordinates.lat}.json?access_token=${token}`)
-    //         .then(res => res.json());
-    //     // console.log(response.features);
-    //     let place = "";
-    //     let region = "";
-    //     response.features.forEach(feature => {
-    //         if (feature.id.includes("place")) {
-    //             place = feature.text;
-    //         } else if (feature.id.includes("region")) {
-    //             region = feature.text;
-    //         }
-    //     })
-    //     return `${place}, ${region}`;
-    // }
-
 })();
