@@ -101,9 +101,10 @@
             const weatherCard = document.createElement("div");
             const date = document.createElement("p");
             const description = document.createElement("h3");
+            const blockOne = document.createElement("div");
             const subDescription = document.createElement("p");
             const icon = document.createElement("img");
-            const tempDiv = document.createElement("div");
+            const blockThree = document.createElement("div");
             const dateRaw = new Date(current.dt * 1000);
             date.innerHTML = formatDate(dateRaw);
             weatherCard.classList.add("weather-card");
@@ -111,16 +112,18 @@
             subDescription.innerText = current.subDescription;
             subDescription.style.fontSize = "0.8em";
             icon.src = `https://openweathermap.org/img/wn/${current.icon}@2x.png`;
-            tempDiv.classList = "d-flex justify-content-between flex-wrap"
-            tempDiv.innerHTML = `<p class="col-12">Currently: ${current.currentTemp[1]}</p>`
-            weatherCard.appendChild(date);
-            weatherCard.appendChild(description);
+            blockOne.classList.add("weather-blocks");
+            blockThree.classList.add("weather-blocks");
+            blockThree.innerHTML = `<p class="col-12">Currently: ${current.currentTemp[1]}</p>`
+            blockOne.appendChild(date);
+            blockOne.appendChild(description);
+            blockThree.appendChild(subDescription)
+            weatherCard.appendChild(blockOne);
             weatherCard.appendChild(icon);
-            weatherCard.appendChild(subDescription);
-            weatherCard.appendChild(tempDiv);
+            weatherCard.appendChild(blockThree);
             weatherCardContainer.appendChild(weatherCard);
         }
-        weatherCardContainer.classList = "d-md-flex justify-content-between";
+        weatherCardContainer.classList.add("d-md-flex");
         weatherContainer.appendChild(weatherCardContainer);
     }
 
