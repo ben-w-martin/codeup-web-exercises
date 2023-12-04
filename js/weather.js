@@ -13,7 +13,7 @@
     const coordinates = document.getElementById('coordinates');
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v12',
+        style: 'mapbox://styles/mapbox/satellite-streets-v12',
         center: [homeLngLat.lng, homeLngLat.lat],
         zoom: 3
     });
@@ -31,6 +31,8 @@
                 center: lngLatArr,
                 essential: true
             });
+            coordinates.classList.add("d-none", "d-md-block");
+            coordinates.innerHTML = `Longitude: ${lngLatObj.lng}<br />Latitude: ${lngLatObj.lat}`;
             getWeather(lngLatObj);
             renderCity(city);
         }
@@ -42,7 +44,8 @@
     function getWeather(coords) {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng}&appid=${OW_KEY}`)
             .then(data => data.json())
-            .then(currentWeather => constructWeatherArr(currentWeather));
+            .then(currentWeather => constructWeatherArr(currentWeather))
+            .catch(error => alert("Error! " + error));
     }
 
     getWeather(homeLngLat);
@@ -81,6 +84,17 @@
         renderWeather(weatherArr);
     }
 
+    function formatDate(date) {
+        console.log(date);
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        const dayOfWeek = daysOfWeek[date.getDay()];
+        const dayOfMonth = date.getDate();
+        const month = months[date.getMonth()];
+        return `${dayOfWeek} ${month} ${dayOfMonth}`;
+    }
+
     function renderWeather(weatherArr) {
         const weatherCardContainer = document.createElement("div");
         weatherContainer.innerHTML = "";
@@ -92,7 +106,9 @@
             const subDescription = document.createElement("p");
             const icon = document.createElement("img");
             const tempDiv = document.createElement("div");
-            date.innerHTML = new Date(current.dt * 1000).toDateString();
+            const dateRaw = new Date(current.dt * 1000);
+            date.innerHTML = formatDate(dateRaw);
+            weatherCard.classList.add("weather-card");
             description.innerText = current.description;
             subDescription.innerText = current.subDescription;
             subDescription.style.fontSize = "0.8em";
@@ -145,7 +161,8 @@
         var endPoint = '/geocoding/v5/mapbox.places/';
         return fetch(`${baseUrl}${endPoint}${encodeURIComponent(search)}.json?access_token=${token}`)
             .then(res => res.json())
-            .then(data => data.features[0].center);
+            .then(data => data.features[0].center)
+            .catch(error => alert("Error! " + error));
     }
 
     async function reverseGeocode(coords) {
@@ -153,7 +170,8 @@
             .then(resp => resp.json())
             .then(data => {
                 return data[0];
-            });
+            })
+            .catch(error => alert("Error! " + error));
         return `${response.name}, ${response.state}`;
     }
 })();
