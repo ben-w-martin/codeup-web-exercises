@@ -71,7 +71,7 @@
                 currentTemp: temperatureToggle(response[i].main.temp_max),
                 low: temperatureToggle(response[i].main.temp_min),
                 feelsLike: temperatureToggle(response[i].main.feels_like),
-                rain: response[i].rain, // **
+                rain: response[i].rain,
                 humidity: response[i].main.humidity,
                 description: response[i].weather[0].main,
                 subDescription: response[i].weather[0].description,
@@ -85,10 +85,8 @@
     }
 
     function formatDate(date) {
-        console.log(date);
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
         const dayOfWeek = daysOfWeek[date.getDay()];
         const dayOfMonth = date.getDate();
         const month = months[date.getMonth()];
@@ -126,11 +124,15 @@
         weatherContainer.appendChild(weatherCardContainer);
     }
 
+    // places marker --------------------------------------------------------------
     const marker = new mapboxgl.Marker({
         draggable: true
     })
         .setLngLat([homeLngLat.lng, homeLngLat.lat])
         .addTo(map);
+
+    marker.on('dragend', onDragEnd);
+    map.addControl(new mapboxgl.NavigationControl());
 
     // Sets coords on map. Retrieves city, sends to be rendered---------------------
     async function onDragEnd() {
@@ -146,15 +148,12 @@
         renderCity(city);
     }
 
+    // displays city at "current city"
     function renderCity(city) {
         const currentCity = document.querySelector(".city");
         currentCity.innerText = city;
         return city;
     }
-
-    marker.on('dragend', onDragEnd);
-
-    map.addControl(new mapboxgl.NavigationControl());
 
     function geocode(search, token) {
         var baseUrl = 'https://api.mapbox.com';
