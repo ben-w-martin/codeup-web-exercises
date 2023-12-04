@@ -37,6 +37,38 @@ main {
 .weather-blocks {
     display: flex;
     flex-direction: column;
+    backface-visibility: hidden;
+}
+
+.weather-card:nth-of-type(1) {
+    animation: moveInBottom .15s ease-in;
+}
+.weather-card:nth-of-type(2) {
+    animation: moveInBottom .15s ease-in;
+    animation-delay: .1s;
+}
+.weather-card:nth-of-type(3) {
+    animation: moveInBottom .15s ease-in;
+    animation-delay: .2s;
+}
+.weather-card:nth-of-type(4) {
+    animation: moveInBottom .15s ease-in;
+    animation-delay: .3s;
+}
+.weather-card:nth-of-type(5) {
+    animation: moveInBottom .15s ease-in;
+    animation-delay: .4s;
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
 
 #map-container {
