@@ -43,6 +43,11 @@ main {
     position: relative;
 }
 
+#map {
+    width: 100%;
+    height: 300px;
+}
+
 #search-form * {
     border: none;
     outline: none;
@@ -130,4 +135,10 @@ main {
         border-right: 1px solid #868686;
     }
 
+}
+
+@media (min-width: 1200px) {
+    #map {
+        height: 500px
+    }
 }

@@ -93,6 +93,7 @@
         return `${dayOfWeek} ${month} ${dayOfMonth}`;
     }
 
+    // constructs weather cards and their child elements----------------------------
     function renderWeather(weatherArr) {
         const weatherCardContainer = document.createElement("div");
         weatherContainer.innerHTML = "";
@@ -127,7 +128,7 @@
         weatherContainer.appendChild(weatherCardContainer);
     }
 
-    // places marker --------------------------------------------------------------
+    // places marker ---------------------------------------------------------------
     const marker = new mapboxgl.Marker({
         draggable: true
     })
