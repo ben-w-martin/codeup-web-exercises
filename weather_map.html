@@ -9,30 +9,37 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
 
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Mulish:300" rel="stylesheet">
+
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
     <script src="js/keys.js"></script>
 
 </head>
 <body>
-<header class="border">
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<header class="h-100">
     <h1 class="text-center my-3">My Weather Map</h1>
 </header>
-<main class="container bg-light rounded-bottom">
-    <section class="row">
-        <div id="weather-container" class="bg-secondary"></div>
-    </section>
-    <section class="row">
-        <div id="map-container" class="col-10 offset-1 my-3 p-3 rounded bg-secondary">
-            <div id="current-city" class="d-flex">
-                <h3>Current City: <span class="city">Lynchburg, Virginia</span></h3>
+<main>
+    <div class="container">
+        <section class="row">
+            <div id="weather-container" class="bg-secondary"></div>
+        </section>
+        <section class="row">
+            <div id="map-container" class="col-10 offset-1 p-3 rounded-bottom">
+                <div id="current-city" class="d-flex justify-content-between align-items-center">
+                    <h3>Current City: <span class="city">Lynchburg, Virginia</span></h3>
+                    <form id="search-form" action="#" class="bg-light d-flex align-items-center">
+                        <button id="search-btn" type="button">Search</button>
+                        <input type="search" id="search-bar" class="h-100">
+                    </form>
+                </div>
+                <div id='map' style='width: 100%; height: 300px;'></div>
+                <pre id="coordinates" class="coordinates"></pre>
             </div>
-            <div id='map' style='width: 100%; height: 300px;'></div>
-            <pre id="coordinates" class="coordinates"></pre>
-        </div>
-    </section>
+        </section>
+    </div>
 </main>
-<footer></footer>
-
 <script src="js/weather.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </body>
