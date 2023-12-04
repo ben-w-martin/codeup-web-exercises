@@ -4,6 +4,8 @@
     const mapContainer = document.querySelector("#map");
     const weatherContainer = document.querySelector("#weather-container");
     const homeLngLat = {lng: -79.14397251288815, lat: 37.410942615370175};
+    const search = document.querySelector("#search-bar");
+    const searchBtn = document.querySelector("#search-btn");
     let weatherArr = [];
 
     // render map-------------------------------------------------------------------
@@ -11,10 +13,30 @@
     const coordinates = document.getElementById('coordinates');
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/satellite-streets-v12',
+        style: 'mapbox://styles/mapbox/streets-v12',
         center: [homeLngLat.lng, homeLngLat.lat],
         zoom: 3
     });
+
+    // search bar-------------------------------------------------------------------
+    async function searchBar(e) {
+        e.preventDefault()
+        const input = search.value;
+        if (search.value !== "") {
+            const lngLatArr = await geocode(input, MB_KEY);
+            const lngLatObj = {lng: lngLatArr[0], lat: lngLatArr[1]}
+            let city = await reverseGeocode(lngLatObj);
+            marker.setLngLat(lngLatObj);
+            map.flyTo({
+                center: lngLatArr,
+                essential: true
+            });
+            getWeather(lngLatObj);
+            renderCity(city);
+        }
+    }
+
+    searchBtn.addEventListener("click", searchBar);
 
     // render weather---------------------------------------------------------------
     function getWeather(coords) {
@@ -38,7 +60,6 @@
     // todo temp min needs to be lowest temp for the day. Maybe it's own function
     async function constructWeatherArr(data) {
         const response = await data.list;
-        console.log(response)
         let weatherObj = {};
         weatherArr = [];
         for (let i = 0; i < response.length; i += 8) {
@@ -77,7 +98,7 @@
             subDescription.style.fontSize = "0.8em";
             icon.src = `https://openweathermap.org/img/wn/${current.icon}@2x.png`;
             tempDiv.classList = "d-flex justify-content-between flex-wrap"
-            tempDiv.innerHTML = `<p class="col-12">Currently: ${current.currentTemp[1]}</p><br /><p>High&uarr;</p><p>Low&darr;</p>`
+            tempDiv.innerHTML = `<p class="col-12">Currently: ${current.currentTemp[1]}</p>`
             weatherCard.appendChild(date);
             weatherCard.appendChild(description);
             weatherCard.appendChild(icon);
@@ -100,6 +121,10 @@
         const lngLat = marker.getLngLat();
         getWeather(lngLat);
         let city = await reverseGeocode(lngLat);
+        map.flyTo({
+            center: lngLat,
+            essential: true
+        });
         coordinates.classList.add("d-none", "d-md-block");
         coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
         renderCity(city);
