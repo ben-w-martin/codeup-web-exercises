@@ -39,6 +39,11 @@
     }
 
     searchBtn.addEventListener("click", searchBar);
+    search.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            searchBar(e);
+        }
+    });
 
     // render weather---------------------------------------------------------------
     function getWeather(coords) {
