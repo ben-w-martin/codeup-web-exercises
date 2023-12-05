@@ -175,7 +175,7 @@ main {
 
 }
 
-@media (min-width: 1200px) and (min-height: 726px){
+@media (min-width: 1200px) and (min-height: 700px){
     #map {
         height: 500px
     }
